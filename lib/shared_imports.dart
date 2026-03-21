@@ -24,7 +24,7 @@ export 'package:litzorum/models/settings.dart';
 
 // 4. Global State & Services
 export 'package:litzorum/main.dart';
-export 'package:litzorum/audio_service.dart';
+export 'package:litzorum/services/audio_service.dart';
 export 'package:litzorum/utils.dart';
 
 // 5. Pages & Navigation

@@ -1,4 +1,4 @@
-import 'shared_imports.dart';
+import '../shared_imports.dart';
 
 /// A global service to manage background music and UI sound effects.
 /// 
