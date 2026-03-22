@@ -1,6 +1,12 @@
 import 'package:litzorum/main.dart';
 
+/// A centralized localization service for multi-language support.
+/// 
+/// Provides a mechanism to retrieve translated strings based on the 
+/// user's language preference stored in Hive settings.
 class TranslationService {
+  // A static map containing key-value pairs for all supported languages.
+  // Each top-level key is an ISO language code (e.g., 'en', 'ua', 'es').
   static const Map<String, Map<String, String>> _translations = {
     'en': {
       'New game': 'New game',
@@ -842,6 +848,11 @@ class TranslationService {
 
   };
 
+  // Fetches the translation for a given [key] based on the saved language.
+  // 
+  // 1. Reads the "language" setting from the Hive "settings0" box.
+  // 2. Defaults to 'en' (English) if no language is set.
+  // 3. Returns the translated string or the [key] itself if no translation is found.
   static String translate(String key) {
     final settings = settingsBox.get("settings0");
     final String lang = settings?.settings["language"] ?? "en";
@@ -850,6 +861,7 @@ class TranslationService {
   }
 }
 
+// Syntactic sugar for translating strings.
 extension TranslationExtension on String {
   String get tr => TranslationService.translate(this);
 }

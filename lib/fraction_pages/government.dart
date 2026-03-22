@@ -1,6 +1,11 @@
 import 'package:litzorum/services/shared_imports.dart';
 import 'package:litzorum/services/translation_service.dart';
 
+/// The central government management screen for overseeing national affairs.
+/// 
+/// This page handles core state mechanics, including ideology selection, 
+/// population monitoring, leader popularity, and the central bank's currency 
+/// exchange system for converting goods into budget.
 class Government extends StatefulWidget {
   const Government({super.key});
 
@@ -9,7 +14,7 @@ class Government extends StatefulWidget {
 }
 
 class _GovernmentState extends State<Government> {
-
+  // Tooltips describing various government parameters for the player.
   Map<String, String> toolTips = {
     "Ideology" : "Ideologies give boost to fractions",
     "Leader's popularity" : "Depends on life quality, purchasing power and overall culture level",
@@ -18,7 +23,8 @@ class _GovernmentState extends State<Government> {
     "Army": "Army of Litzórum. You can recruit units for some money"
   };
 
-      // Get current ideology
+  // Asynchronously retrieves the currently active state ideology from the Hive database.
+  // Sets the [currentIdeology] global variable and updates the UI state.
   Future getIdeology() async {
     var box = await Hive.openBox("ideologies");
 
@@ -34,7 +40,11 @@ class _GovernmentState extends State<Government> {
     return Future.value(box.values);
   }
 
-  // Create parameter
+  // Generates a UI parameter card for specific government metrics.
+  // 
+  // [asset] - Path to the visual icon.
+  // [headText] - Title of the parameter (e.g., "Exchange" or "Population").
+  // [text] - List of strings displaying current values or descriptions.
   Padding parameter(String asset, String headText, List<String> text) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -48,13 +58,16 @@ class _GovernmentState extends State<Government> {
 
         child: Row(
           children: [
-
             Container(
               width: MediaQuery.of(context).size.width / 1.24,
+              // Dynamic height adjustment for the Exchange UI block
               height: headText == "Exchange" ? 180 : 96,
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 159, 145, 110),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10), 
+                  bottomLeft: Radius.circular(10)
+                )
               ),
               child: Row(
                 children: [
@@ -82,6 +95,7 @@ class _GovernmentState extends State<Government> {
                         )),
 
                       if (headText == "Exchange")
+                        // Special UI layout for the goods exchange system
                         SizedBox(
                           width: MediaQuery.of(context).size.width/1.9,
                           child: Wrap(
@@ -97,28 +111,28 @@ class _GovernmentState extends State<Government> {
                             ],
                           ),
                         ),
-                        
-                        
-                      
                   ]),
                 ],
               ),
             ),
 
+            // Action column for buttons (Info, Expand, or Exchange actions)
             Column(
               children: [
                 
                 if (headText != "Exchange")
                   infoButton(toolTips[headText]!, true),
 
-
+                // Logic for the goods-to-budget currency exchange
                 if (headText == "Exchange")
                   IconButton(
                     onPressed: () {
                       // Play the sound effect immediately
                       AudioService().playClick(); 
                       setState(() {
-                        currentgameStats.stats["exchange_amount"] = "${int.parse(currentgameStats.stats["exchange_amount"]!) + 1}";
+                        currentgameStats.stats["exchange_amount"] = "${
+                          int.parse(currentgameStats.stats["exchange_amount"]!) + 1
+                          }";
                       });
                     }, 
                     icon: Image.asset("assets/add_icon.png", height: 22)
@@ -129,10 +143,14 @@ class _GovernmentState extends State<Government> {
                     onPressed: () {
                       // Play the sound effect immediately
                       AudioService().playClick(); 
-                      if (int.parse(currentgameStats.stats["exchange_amount"]!) - 1 <= 0) {
+                      if (
+                        int.parse(currentgameStats.stats["exchange_amount"]!) - 1 <= 0
+                      ) {
                       } else {
                         setState(() {
-                          currentgameStats.stats["exchange_amount"] = "${int.parse(currentgameStats.stats["exchange_amount"]!) - 1}";
+                          currentgameStats.stats["exchange_amount"] = "${
+                            int.parse(currentgameStats.stats["exchange_amount"]!) - 1
+                            }";
                         });
                       }
                     }, 
@@ -146,19 +164,29 @@ class _GovernmentState extends State<Government> {
                       // Play the sound effect immediately
                       AudioService().playClick(); 
                       if (currentGame.goods == 0.0) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text("Not enough goods to exchange"),
-                        ));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Not enough goods to exchange"),
+                          ));
                         
                       } else {
                         setState(() {
-                          if (currentGame.goods - double.parse(currentgameStats.stats["exchange_amount"]!) >= 0) {
-                            currentGame.goods -= int.parse(currentgameStats.stats["exchange_amount"]!); 
-                            currentGame.budget += (double.parse(currentGame.exchangeRate[0]) * int.parse(currentgameStats.stats["exchange_amount"]!));
+                          if (
+                            currentGame.goods - 
+                            double.parse(currentgameStats.stats["exchange_amount"]!) >= 0
+                          ) {
+                            currentGame.goods -= int.parse(
+                              currentgameStats.stats["exchange_amount"]!
+                            ); 
+                            currentGame.budget += (
+                              double.parse(currentGame.exchangeRate[0]) * 
+                              int.parse(currentgameStats.stats["exchange_amount"]!)
+                            );
                           } else {
-                            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                              content: Text("Not enough goods to exchange"),
-                            ));
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text("Not enough goods to exchange"),
+                              ));
                           }
                         });
                       }
@@ -171,7 +199,8 @@ class _GovernmentState extends State<Government> {
                     onPressed: () {
                       // Play the sound effect immediately
                       AudioService().playClick(); 
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const ParamsPage("ideologies")));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (BuildContext context) => const ParamsPage("ideologies")));
                     }, 
                     icon: Image.asset("assets/expand_icon.png", height: 22)
                   ),
@@ -182,13 +211,15 @@ class _GovernmentState extends State<Government> {
                       // Play the sound effect immediately
                       AudioService().playClick(); 
                       if (currentGame.budget < 1000000.0) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text("Not enough money"),
-                        ));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Not enough money"),
+                          ));
                       } else {
                         setState(() {
                           currentGame.budget -= 1000000.0; 
-                          currentGame.exchangeRate = "${double.parse(currentGame.exchangeRate[0]) + 1}/1";
+                          currentGame.exchangeRate = "${
+                            double.parse(currentGame.exchangeRate[0]) + 1}/1";
                         });
                       }
                       
@@ -202,13 +233,17 @@ class _GovernmentState extends State<Government> {
                       // Play the sound effect immediately
                       AudioService().playClick(); 
                       if (currentGame.budget < 2000.0) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text("Not enough money"),
-                        ));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text("Not enough money"),
+                          ));
                       } else if (currentGame.population <= 1000) {
-                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                          content: Text("Not enough population. WHAT HAVE YOU DONE??!"),
-                        ));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text(
+                              "Not enough population. WHAT HAVE YOU DONE??!"
+                            ),
+                          ));
                       } else {
                         setState(() {
                           currentGame.budget -= 2000.0; 
@@ -220,10 +255,8 @@ class _GovernmentState extends State<Government> {
                     }, 
                     icon: Image.asset("assets/fund_icon.png", height: 22)
                   ), 
-                
               ]
             ),
-            
           ]
         )
       )
@@ -274,7 +307,9 @@ class _GovernmentState extends State<Government> {
             body: DecoratedBox(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/background.png"), fit: BoxFit.cover),
+                    image: AssetImage("assets/background.png"), 
+                    fit: BoxFit.cover
+                  ),
               ),
               child: SingleChildScrollView(
                 child: Padding(
@@ -287,7 +322,9 @@ class _GovernmentState extends State<Government> {
                       ),
                       parameter(
                         "assets/rate.png", "Leader's popularity", 
-                        ["${double.parse(currentGame.leadersPopularity.toStringAsFixed(1))}%"]
+                        ["${
+                          double.parse(currentGame.leadersPopularity.toStringAsFixed(1))
+                        }%"]
                       ),
                       parameter(
                         "assets/population.png", "Population", 
@@ -295,16 +332,22 @@ class _GovernmentState extends State<Government> {
                       ),
                       parameter(
                         "assets/army_number.png", "Army", 
-                        [getShortNumberForm(currentArmySettings['Litzórum']!.armyAmount.round())]
+                        [getShortNumberForm(
+                          currentArmySettings['Litzórum']!.armyAmount.round()
+                        )]
                       ),
                       parameter(
                         "assets/money.png", "Bank of Litzórum", 
-                        ["${"Budget".tr}: ${formatLongNumber(currentGame.budget, isDouble: true)}", 
+                        ["${"Budget".tr}: ${formatLongNumber(
+                          currentGame.budget, isDouble: true
+                        )}", 
                         "${"Exchange rate".tr}: ${currentGame.exchangeRate}"]
                       ),
                       parameter(
                         "assets/exchange.png", "Exchange", 
-                        ["${"Goods for exchange".tr}:", "${currentgameStats.stats["exchange_amount"]}"], 
+                        ["${"Goods for exchange".tr}:", "${
+                          currentgameStats.stats["exchange_amount"]
+                        }"], 
                       ),
 
                       backButton(context),

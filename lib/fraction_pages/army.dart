@@ -1,6 +1,11 @@
 import 'package:litzorum/services/shared_imports.dart';
 import 'package:litzorum/services/translation_service.dart';
 
+/// The military management screen for upgrading national defense and strategic capabilities.
+/// 
+/// Handles budget allocation for attack, defense, and HQ levels, while 
+/// providing tools for troop distribution across the frontline, air defense, 
+/// and home front through interactive sliders.
 class Army extends StatefulWidget {
   const Army({super.key});
 
@@ -43,7 +48,10 @@ class _ArmyState extends State<Army> {
               height: 96,
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 159, 145, 110),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10), 
+                  bottomLeft: Radius.circular(10)
+                )
               ),
               child: Wrap(
                 direction: Axis.horizontal,
@@ -87,13 +95,17 @@ class _ArmyState extends State<Army> {
                     // Play the sound effect immediately
                     AudioService().playClick(); 
                     if (headText == "World map") {
-                      Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const WorldMapPage()));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (BuildContext context) => const WorldMapPage()
+                      ));
                     } else {
                       if (headText == "HQ") {
                         if (currentGame.budget < hqExpence) {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            content: Text("Not enough money"),
-                          ));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Not enough money"),
+                            )
+                          );
                         } else {
                           if (currentGame.HQLevel < 10.0) {
                             setState(() {
@@ -104,9 +116,11 @@ class _ArmyState extends State<Army> {
                         }
                       } else if (headText == "Attack") {
                         if (currentGame.budget < attackExpense) {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            content: Text("Not enough money"),
-                          ));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Not enough money"),
+                            )
+                          );
                         } else {
                           if (currentGame.attackLevel < 10.0) {
                             setState(() {
@@ -117,9 +131,11 @@ class _ArmyState extends State<Army> {
                         }
                       } else if (headText == "Defence") {
                         if (currentGame.budget < defenceExpense) {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            content: Text("Not enough money"),
-                          ));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text("Not enough money"),
+                            )
+                          );
                         } else {
                           if (currentGame.defenceLevel < 10.0) {
                             setState(() {
@@ -135,8 +151,6 @@ class _ArmyState extends State<Army> {
                           ));
                         } else {
                           setState(() {
-                            //currentGame.budget -= defenceExpense; 
-                            //currentGame.defenceLevel += 0.1;
                           });
                         }
                       } else if (headText == "Back") {
@@ -146,8 +160,6 @@ class _ArmyState extends State<Army> {
                           ));
                         } else {
                           setState(() {
-                            //currentGame.budget -= defenceExpense; 
-                            //currentGame.defenceLevel += 0.1;
                           });
                         }
                       } else if (headText == "Frontline") {
@@ -157,14 +169,17 @@ class _ArmyState extends State<Army> {
                           ));
                         } else {
                           setState(() {
-                            //currentGame.budget -= defenceExpense; 
-                            //currentGame.defenceLevel += 0.1;
                           });
                         }
                       }
                       
-                      currentGame.cultureLevel = (currentGame.highCultureLevel + currentGame.massCultureLevel) / 2;
-                      currentGame.lifeQuality = (currentGame.purchasingPower + currentGame.educationLevel + currentGame.cultureLevel) / 3;
+                      currentGame.cultureLevel = (
+                        currentGame.highCultureLevel + 
+                        currentGame.massCultureLevel) / 2;
+                      currentGame.lifeQuality = (
+                        currentGame.purchasingPower + 
+                        currentGame.educationLevel + 
+                        currentGame.cultureLevel) / 3;
                     }
                   }, 
                   icon: headText == "World map" ? 
@@ -196,12 +211,10 @@ class _ArmyState extends State<Army> {
         fontSize: 10.0,
       ),
       showValueIndicator: ShowValueIndicator.onDrag,
-      // Налаштування меж та форми
       trackHeight: 6.0,
       thumbShape: const RoundSliderThumbShape(
         enabledThumbRadius: 12.0,
       ),
-      // Якщо потрібна чітка рамка навколо треку, використовуємо кастомний Paint
       trackShape: const RoundedRectSliderTrackShape(), 
     ),
     child: Slider(
@@ -217,15 +230,27 @@ class _ArmyState extends State<Army> {
       max: currentArmySettings['Litzórum']!.armyAmount,
       onChanged: (value) {
         if (parameter == "Air defence") {
-          if (value <= (currentArmySettings['Litzórum']!.armyAmount - currentArmySettings['Litzórum']!.frontlineAmount - currentArmySettings['Litzórum']!.backAmount)) {
+          if (
+            value <= (currentArmySettings['Litzórum']!.armyAmount - 
+            currentArmySettings['Litzórum']!.frontlineAmount - 
+            currentArmySettings['Litzórum']!.backAmount)
+          ) {
               currentArmySettings['Litzórum']!.airDefenceAmount = value;
           }
         } else if (parameter == "Frontline") {
-          if (value <= (currentArmySettings['Litzórum']!.armyAmount - currentArmySettings['Litzórum']!.airDefenceAmount - currentArmySettings['Litzórum']!.backAmount)) {
+          if (
+            value <= (currentArmySettings['Litzórum']!.armyAmount - 
+            currentArmySettings['Litzórum']!.airDefenceAmount - 
+            currentArmySettings['Litzórum']!.backAmount)
+          ) {
               currentArmySettings['Litzórum']!.frontlineAmount = value;
           }
         } else {
-          if (value <= (currentArmySettings['Litzórum']!.armyAmount - currentArmySettings['Litzórum']!.frontlineAmount - currentArmySettings['Litzórum']!.airDefenceAmount)) {
+          if (
+            value <= (currentArmySettings['Litzórum']!.armyAmount - 
+            currentArmySettings['Litzórum']!.frontlineAmount - 
+            currentArmySettings['Litzórum']!.airDefenceAmount)
+          ) {
               currentArmySettings['Litzórum']!.backAmount = value;
           }
         }
@@ -263,7 +288,10 @@ class _ArmyState extends State<Army> {
                       "${double.parse(currentGame.HQLevel.toStringAsFixed(2))}" :
                       "MAX"}",
                     currentGame.HQLevel < 10? 
-                      "${'To next level'.tr}: ${double.parse(((currentGame.HQLevel + 1.0).round() - currentGame.HQLevel ).toStringAsFixed(2))}" :
+                      "${'To next level'.tr}: ${
+                        double.parse(((currentGame.HQLevel + 1.0).round() - 
+                        currentGame.HQLevel ).toStringAsFixed(2))
+                      }" :
                       ""
                   ]
                 ),
@@ -274,7 +302,10 @@ class _ArmyState extends State<Army> {
                       "${double.parse(currentGame.attackLevel.toStringAsFixed(2))}" :
                       "MAX"}",
                     currentGame.attackLevel < 10? 
-                      "${'To next level'.tr}: ${double.parse(((currentGame.attackLevel + 1.0).round() - currentGame.attackLevel ).toStringAsFixed(2))}" :
+                      "${'To next level'.tr}: ${
+                        double.parse(((currentGame.attackLevel + 1.0).round() - 
+                        currentGame.attackLevel ).toStringAsFixed(2))
+                      }" :
                       ""
                   ]
                 ),
@@ -285,21 +316,36 @@ class _ArmyState extends State<Army> {
                       "${double.parse(currentGame.defenceLevel.toStringAsFixed(2))}" :
                       "MAX"}",
                     currentGame.defenceLevel < 10? 
-                      "${'To next level'.tr}: ${double.parse(((currentGame.defenceLevel + 1.0).round() - currentGame.defenceLevel ).toStringAsFixed(2))}" :
+                      "${'To next level'.tr}: ${
+                        double.parse(((currentGame.defenceLevel + 1.0).round() - 
+                        currentGame.defenceLevel ).toStringAsFixed(2))
+                      }" :
                       ""
                   ]
                 ),
                 parameter(
                   "assets/air_defence.png", "Air defence", 
-                  ["${'Active personnel'.tr}: ${getShortNumberForm(currentArmySettings['Litzórum']!.airDefenceAmount.round())}"]
+                  ["${'Active personnel'.tr}: ${
+                    getShortNumberForm(
+                      currentArmySettings['Litzórum']!.airDefenceAmount.round()
+                    )
+                  }"]
                 ),
                 parameter(
                   "assets/frontline.png", "Frontline", 
-                  ["${'Active personnel'.tr}: ${getShortNumberForm(currentArmySettings['Litzórum']!.frontlineAmount.round())}"]
+                  ["${'Active personnel'.tr}: ${
+                    getShortNumberForm(
+                      currentArmySettings['Litzórum']!.frontlineAmount.round()
+                    )
+                  }"]
                 ),
                 parameter(
                   "assets/home_front.png", "Back", 
-                  ["${'Active personnel'.tr}: ${getShortNumberForm(currentArmySettings['Litzórum']!.backAmount.round())}"]
+                  ["${'Active personnel'.tr}: ${
+                    getShortNumberForm(
+                      currentArmySettings['Litzórum']!.backAmount.round()
+                    )
+                  }"]
                 ),
                 
                 backButton(context),

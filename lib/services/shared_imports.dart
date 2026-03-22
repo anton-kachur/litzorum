@@ -8,14 +8,12 @@ export 'dart:math' show Random;
 export 'package:flutter/material.dart';
 
 // 2. Third-party Packages
-// Most of these are better exported fully to avoid constant editing of this file
 export 'package:audioplayers/audioplayers.dart';
 export 'package:hive_flutter/hive_flutter.dart';
 export 'package:intl/intl.dart' show NumberFormat;
 export 'package:path_provider/path_provider.dart';
 
 // 3. Data Models
-// Exporting the whole file automatically includes both the class and the Adapter
 export 'package:litzorum/models/armySettings.dart'; 
 export 'package:litzorum/models/game.dart';
 export 'package:litzorum/models/gameStats.dart';
