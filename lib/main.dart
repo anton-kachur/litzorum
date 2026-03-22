@@ -1,7 +1,6 @@
 import 'services/shared_imports.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
-//late TranslationService translationService;
 late Box<Game> gameBox;
 late Box<Ideology> ideologiesBox;
 late Box<ArmySettings> countriesArmiesBox;
@@ -53,12 +52,6 @@ Future<void> main() async {
     );
   }
 
-  for (var i in settingsBox.values) {
-    print(i.toString());
-  }
-
-  //translationService = TranslationService(); 
-
   //============================================================================
   // Ideologies ================================================================
   //============================================================================
@@ -82,20 +75,12 @@ Future<void> main() async {
       Ideology(name: "Hedonism", bonuses: {"+50% People" : 0.5, "+70% Culture": 0.7}, isChosen: false)
     );
   }
-   
-  //============================================================================
-  // Armies settings ===========================================================
-  //============================================================================
-  //var iBox = await Hive.openBox<ArmySettings>("saved_countries_armies");
-  //iBox.clear();
 
   //============================================================================
   // Games =====================================================================
   //============================================================================
   gameBox = await Hive.openBox<Game>("saved_games");
   countriesArmiesBox = await Hive.openBox<ArmySettings>("saved_countries_armies");
-  //gameBox.clear();
-  //countriesArmiesBox.clear();
 
   runApp(
     const LoadingLogoScreen(),

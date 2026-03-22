@@ -87,7 +87,8 @@ class _EndingPageState extends State<EndingPage> {
           ),
           child: Center(
             child: IconButton(
-              // Offset the button downwards to avoid obscuring the center of the art
+              // Offset the button downwards to avoid obscuring the center 
+              // of the art
               padding: EdgeInsets.only(
                 top: MediaQuery.of(context).size.height/2.5
               ),

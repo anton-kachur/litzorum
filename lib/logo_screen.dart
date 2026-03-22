@@ -1,12 +1,15 @@
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:litzorum/services/shared_imports.dart' show StatelessWidget, BuildContext, Widget, StartScreen, LoadSaveScreen, Government, People, Industry, Science, Army, Culture, MainScreen, StatefulWidget, State, TickerProviderStateMixin, AnimationController, Animation, TickerCanceled, Color, settingsBox, navigatorKey, Colors, ThemeData, MaterialApp, ValueListenableBuilder, Curves, CurvedAnimation, WidgetsBinding, debugPrint, MainAxisAlignment, Image, MediaQuery, Column, FadeTransition, Center, Scaffold;
+import 'package:litzorum/services/shared_imports.dart';
 
+/// The application's entry point and splash screen featuring the studio logo.
+/// 
+/// Initializes the main app configuration, including the global navigation 
+/// routes, and executes a smooth fade-in animation before transitioning 
+/// the user to the main menu.
 class LoadingLogoScreen extends StatelessWidget {
   const LoadingLogoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    //context.watch<TranslationService>();
     
     return MaterialApp(
       navigatorKey: navigatorKey,
@@ -40,7 +43,6 @@ class StartLoading extends StatefulWidget {
 }
 
 class _StartLoadingState extends State<StartLoading> with TickerProviderStateMixin {
-
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -86,8 +88,6 @@ class _StartLoadingState extends State<StartLoading> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
-    //context.watch<TranslationService>();
-
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 45, 45, 45),
      

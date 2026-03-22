@@ -1,7 +1,11 @@
 import 'package:litzorum/services/translation_service.dart';
-
 import 'services/shared_imports.dart';
 
+/// The management screen for national policies, education, and strategic projects.
+/// 
+/// Provides functionality to switch state ideologies (with a cooldown), 
+/// manage educational infrastructure like schools and universities, 
+/// and fund large-scale national development projects.
 class ParamsPage extends StatefulWidget {
   final String mode;
   const ParamsPage(this.mode, {super.key});
@@ -45,7 +49,7 @@ class _ParamsPageState extends State<ParamsPage> {
     return Future.value(ideologiesBox.values);
   }
 
-  // Get all ideologies
+  // Choose current ideology
   Future chooseIdeology(String name) async {
     for (Ideology i in ideologiesBox.values) {
       if (i.name == name) {
@@ -73,7 +77,6 @@ class _ParamsPageState extends State<ParamsPage> {
 
   }
 
-
   // Create ideology parameter
   Padding ideologyParameter(String headText, List<String> text, bool isChosen) {
     return Padding(
@@ -93,11 +96,17 @@ class _ParamsPageState extends State<ParamsPage> {
                 width: MediaQuery.of(context).size.width / 1.24,
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 159, 145, 110),
-                  borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(10), 
+                    bottomLeft: Radius.circular(10)
+                  )
                 ),
                 child: Row(
                   children: [
-                    Image.asset("assets/ideologies/${headText}_ideology.png", height: 90, width: 90),
+                    Image.asset(
+                      "assets/ideologies/${headText}_ideology.png", 
+                      height: 90, width: 90
+                    ),
                     
                     const SizedBox(width: 10),
                     
@@ -130,18 +139,24 @@ class _ParamsPageState extends State<ParamsPage> {
                         chooseIdeology(headText);
                         setState(() {});
                       } else {
-                          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                            content: Text("You can't change ideology within 10 years"),
-                          ));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                            content: Text(
+                              "You can't change ideology within 10 years"
+                            ),
+                          )
+                        );
                       }
                       
                     },
-                    icon: Image.asset(isChosen == true ? "assets/accept_icon.png" : "assets/cancel_icon.png", height: 22)
+                    icon: Image.asset(
+                      isChosen == true ? "assets/accept_icon.png" : 
+                        "assets/cancel_icon.png", 
+                      height: 22
+                    )
                   ),
-
                 ]
               ),
-
             ],
           )
         )
@@ -170,7 +185,10 @@ class _ParamsPageState extends State<ParamsPage> {
               height: 96,
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 159, 145, 110),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10), 
+                  bottomLeft: Radius.circular(10)
+                )
               ),
               child: Row(
                 children: [
@@ -203,7 +221,9 @@ class _ParamsPageState extends State<ParamsPage> {
                     AudioService().playClick(); 
                     setState(() {
                       if (headText == "Schools") {
-                        if (!(currentGame.budget - buildAndDestructionCosts["build_school"]!).isNegative) {
+                        if (
+                          !(currentGame.budget - buildAndDestructionCosts["build_school"]!).isNegative
+                        ) {
                           currentGame.schoolsNumber++;
                           currentGame.budget -= buildAndDestructionCosts["build_school"]!;
                         } else {
@@ -212,7 +232,9 @@ class _ParamsPageState extends State<ParamsPage> {
                           ));
                         }
                       } else if (headText == "Universities") {
-                        if (!(currentGame.budget - buildAndDestructionCosts["build_university"]!).isNegative) {
+                        if (
+                          !(currentGame.budget - buildAndDestructionCosts["build_university"]!).isNegative
+                        ) {
                           currentGame.universitiesNumber++;
                           currentGame.budget -= buildAndDestructionCosts["build_university"]!;
                         } else {
@@ -222,12 +244,11 @@ class _ParamsPageState extends State<ParamsPage> {
                         }
                       } 
 
-                      
                       double el = (
                         ((currentGame.schoolsNumber + (currentGame.schoolsNumber * getIdeologyBonus("Science"))) * 500) + 
                         ((currentGame.universitiesNumber + (currentGame.universitiesNumber * getIdeologyBonus("Science"))) * 1000) + 
                         ((currentGame.researchCentersNumber + (currentGame.researchCentersNumber * getIdeologyBonus("Science"))) * 1500)
-                        ) / currentGame.population;
+                      ) / currentGame.population;
 
                       currentGame.educationLevel = el > 1.0 ? 1.0 : el;
                     });
@@ -391,7 +412,10 @@ class _ParamsPageState extends State<ParamsPage> {
               height: 96,
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 159, 145, 110),
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(10), 
+                  bottomLeft: Radius.circular(10)
+                )
               ),
               child: Row(
                 children: [
@@ -410,7 +434,9 @@ class _ParamsPageState extends State<ParamsPage> {
                       
                     )),
                     
-                    Text("${text[0]}${text[1].substring(0, text[1].length - 6)}M", style: const TextStyle(
+                    Text(
+                      "${text[0]}${text[1].substring(0, text[1].length - 6)}M", 
+                      style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
                       fontFamily: "Monda",
                     )),
@@ -427,7 +453,9 @@ class _ParamsPageState extends State<ParamsPage> {
                       // Play the sound effect immediately
                       AudioService().playClick(); 
                       if (!currentGame.bigProjects.contains(headText)) {
-                          if (!(currentGame.budget - bigProjectsCosts[headText]!).isNegative) {
+                          if (
+                            !(currentGame.budget - bigProjectsCosts[headText]!).isNegative
+                          ) {
                             setState(() {
                             
                             currentGame.bigProjects.add(headText);
@@ -451,14 +479,11 @@ class _ParamsPageState extends State<ParamsPage> {
                           content: Text("You already built this"),
                         ));
                       }
-                      
-                      
                     }, 
                     icon: currentGame.bigProjects.contains(headText) ? 
                       Image.asset("assets/info_icon.png", height: 22) : 
                       Image.asset("assets/build_icon.png", height: 22)
                   ),
-
               ]
             ),
           ],
@@ -519,7 +544,8 @@ class _ParamsPageState extends State<ParamsPage> {
                       if (widget.mode == "big_projects") 
                         for(var i in bigProjectsCosts.entries)
                           bigProjectsParameter(
-                            "assets/big_project_${bigProjectsCosts.keys.toList().indexOf(i.key)+1}.png", i.key, 
+                            "assets/big_project_${bigProjectsCosts.keys.toList().indexOf(i.key)+1}.png", 
+                            i.key, 
                             ["${'Cost'.tr}: ", "${i.value}"]
                           ),
 

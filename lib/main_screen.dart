@@ -57,7 +57,7 @@ class _MainScreenState extends State<MainScreen> {
               style: const TextStyle(
                 fontFamily: "Monda-Bold",
                 fontSize: 12,
-                color: Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+                color: Color.fromARGB(255, 205, 192, 68),
               ),
             ),
           )
@@ -86,24 +86,36 @@ class _MainScreenState extends State<MainScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildFractionButton("assets/government.png", "GOVERNMENT".tr, "government_page"),
-                  _buildFractionButton("assets/people.png", "PEOPLE".tr, "people_page"),
+                  _buildFractionButton(
+                    "assets/government.png", "GOVERNMENT".tr, "government_page"
+                  ),
+                  _buildFractionButton(
+                    "assets/people.png", "PEOPLE".tr, "people_page"
+                  ),
                 ],
               ),
             
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildFractionButton("assets/industry.png", "INDUSTRY".tr, "industry_page"),
-                  _buildFractionButton("assets/science.png", "SCIENCE".tr, "science_page"),
+                  _buildFractionButton(
+                    "assets/industry.png", "INDUSTRY".tr, "industry_page"
+                  ),
+                  _buildFractionButton(
+                    "assets/science.png", "SCIENCE".tr, "science_page"
+                  ),
                 ],
               ),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildFractionButton("assets/army.png", "ARMY".tr, "army_page"),
-                  _buildFractionButton("assets/culture.png", "CULTURE".tr, "culture_page"),
+                  _buildFractionButton(
+                    "assets/army.png", "ARMY".tr, "army_page"
+                  ),
+                  _buildFractionButton(
+                    "assets/culture.png", "CULTURE".tr, "culture_page"
+                  ),
                 ],
               ),
 
@@ -113,7 +125,6 @@ class _MainScreenState extends State<MainScreen> {
       ), 
       
       bottomNavigationBar: bottomBar(context),
-              
     );
   }
 }

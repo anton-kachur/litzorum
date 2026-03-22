@@ -1,5 +1,10 @@
 import 'services/shared_imports.dart';
 
+/// A summary screen that displays detailed gameplay statistics and metrics.
+/// 
+/// Shows the current state of the game session, including economic and 
+/// political data extracted from the currentGame instance, presented 
+/// within a scrollable layout with a themed background.
 class GameStatsPage extends StatefulWidget {
   const GameStatsPage({super.key});
 

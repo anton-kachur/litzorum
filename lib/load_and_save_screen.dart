@@ -2,6 +2,11 @@ import 'package:litzorum/services/translation_service.dart';
 
 import 'services/shared_imports.dart';
 
+/// The save management screen for handling game progression and data persistence.
+/// 
+/// Manages multiple save slots, allowing the player to start new games with 
+/// randomized country stats, load existing sessions, or delete saved data 
+/// and associated army settings from the database.
 class LoadSaveScreen extends StatefulWidget {
   const LoadSaveScreen({super.key});
 
@@ -18,6 +23,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
     return Future.value([gameBox.values, countriesArmiesBox.values]);
   }
 
+  // Extract current army settings
   Future openCurrentArmySettingsBox(String gameId) async {
     Map<String, ArmySettings> values = {};
     
@@ -34,6 +40,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
     }
   }
 
+  // Extract current game settings
   Future openCurrentGameBox(String gameId) async {
     for (Game i in gameBox.values) {
       if (i.gameId == gameId) {
@@ -42,7 +49,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
     }
   }
 
-  // TODO Make same func for army settings
+  // Delete saved game
   Future deleteSaving(String gameId) async {
     // Видаляємо саму гру
     final gameKey = gameBox.keys.firstWhere(
@@ -63,8 +70,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
     impatienceLevel = 0;
   }
 
-
-  // Back button
+  // Icon with cross for deleting saved game
   SizedBox deleteSavedGameButton(BuildContext context) {
     return SizedBox(
       height: 75, width: 300,
@@ -73,7 +79,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
           // Play the sound effect immediately
           AudioService().playClick(); 
           setState(() {
-            deleteIcon = !deleteIcon; // Просто вмикаємо/вимикаємо хрестики
+            deleteIcon = !deleteIcon;
           }); 
         }, 
         icon: Stack(
@@ -88,7 +94,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
               style: const TextStyle(
                 fontFamily: "Monda-Bold",
                 fontSize: 19,
-                color: Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+                color: Color.fromARGB(255, 205, 192, 68),
               ),
             ),
           ]
@@ -97,7 +103,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
     );
   }
 
-
+  // Creates settings for players' army
   Future createNewArmySettings(String gameId) async {
     Map<String, ArmySettings> newArmySettings = {
       "Litzórum": ArmySettings(
@@ -208,7 +214,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
     return Future.value(newArmySettings);
   }
 
-
+  // Initializes new game parameters and saves it to database
   Future startNewGame() async {
     String playerName = settingsBox.values.first.settings["player_name"] ?? "Noname";
     String newGameId = generateGameId();
@@ -260,28 +266,32 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
   Column savingSlotButton(String asset, [String gameId = '', String? date]) => Column(
     children: [
       Stack(
-        alignment: Alignment.topRight, // Хрестик буде у кутку
+        alignment: Alignment.topRight,
         children: [
           IconButton(
             onPressed: () async {
               // Play the sound effect immediately
               AudioService().playClick(); 
-              if (deleteIcon) return; // Якщо режим видалення увімкнено, звичайна кнопка не працює
+              if (deleteIcon) return; 
               
               if (date != null) {
                 currentGame = await openCurrentGameBox(gameId);
                 currentGame.playerName = settingsBox.values.first.settings["player_name"]!;
                 currentArmySettings = await openCurrentArmySettingsBox(gameId);
-                navigatorKey.currentState?.push(MaterialPageRoute(builder: (context) => const MainScreen()));
+                navigatorKey.currentState?.push(
+                  MaterialPageRoute(builder: (context) => const MainScreen())
+                );
               } else {
                 await startNewGame();
-                navigatorKey.currentState?.push(MaterialPageRoute(builder: (context) => const MainScreen()));
+                navigatorKey.currentState?.push(
+                  MaterialPageRoute(builder: (context) => const MainScreen())
+                );
               }
             }, 
             icon: Image.asset(asset, scale: 1.7),
           ),
 
-          // ПОКРАЩЕНИЙ ХРЕСТИК
+          // Cross icon
           if (deleteIcon && date != null) 
             Positioned(
               right: 0,
@@ -290,11 +300,13 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
                 onTap: () async {
                   await deleteSaving(gameId);
                   setState(() {
-                    // Оновлюємо інтерфейс після видалення
                     if (gameBox.isEmpty) deleteIcon = false;
                   });
                 }, 
-                child: Image.asset("assets/cancel_icon.png", height: 30, width: 30),
+                child: Image.asset(
+                  "assets/cancel_icon.png", 
+                  height: 30, width: 30
+                ),
               ),
             ),
         ]
@@ -335,9 +347,13 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
 
                     if (snapshot.hasData)
                       for (Game game in snapshot.data[0]) 
-                        savingSlotButton("assets/save.png", game.gameId, game.gameStartDate),
+                        savingSlotButton(
+                          "assets/save.png", game.gameId, game.gameStartDate
+                        ),
                         
-                    for (int i = 0; i < totalSlots - (snapshot.hasData ? snapshot.data[0].length : 0); i++)
+                    for (int i = 0; i < totalSlots - (
+                        snapshot.hasData ? snapshot.data[0].length : 0); i++
+                      )
                       savingSlotButton("assets/empty_slot.png"),
                     
                     if (snapshot.hasData && snapshot.data[0].isNotEmpty) 
@@ -345,7 +361,9 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
 
                     Center(
                       child: IconButton(
-                        padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/30),
+                        padding: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height / 30
+                        ),
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent, 
                         icon: Stack(
@@ -361,17 +379,18 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
                               style: const TextStyle(
                                 fontFamily: "Monda-Bold",
                                 fontSize: 16,
-                                color: Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+                                color: Color.fromARGB(255, 205, 192, 68),
                               ),
                             ),
                           ]
                         ),
                         
-                        
                         onPressed: () {
                           // Play the sound effect immediately
                           AudioService().playClick(); 
-                          Navigator.of(context).popUntil(ModalRoute.withName("start_screen"));
+                          Navigator.of(context).popUntil(
+                            ModalRoute.withName("start_screen")
+                          );
                         }
                       ), 
                     ),
@@ -379,19 +398,6 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
                 ),
               ),
             ),
-                 /*Column(
-                children: [
-                    
-                  
-                  if (snapshot.hasData) 
-                    if (snapshot.data.length != 0) 
-                      deleteSavedGameButton(context),
-
-                  backButton(context),
-                ]
-              ), */
-            //),
-                    
           );
         }
     );

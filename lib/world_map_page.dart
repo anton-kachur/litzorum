@@ -1,5 +1,9 @@
 import 'services/shared_imports.dart';
 
+/// The global map screen providing an overview of all countries and diplomatic options.
+/// 
+/// Allows the player to interact with different nations to declare war, 
+/// propose trade agreements, or form political unions based on relations.
 class WorldMapPage extends StatefulWidget {
   const WorldMapPage({super.key});
 
@@ -9,6 +13,9 @@ class WorldMapPage extends StatefulWidget {
 
 class _WorldMapPageState extends State<WorldMapPage> {
   final transformationController = TransformationController();
+  // Countries' main parameters 
+  // First 4 - for positioning country's name on world map
+  // Last one - country's name color opacity
   final Map<String, List<double>> _countries = {
     "Litzórum": [257, 277, -30, 17, 139],
     "Imrenia": [248, 236, 0, 6, 184],
@@ -22,6 +29,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
     "Zrașpolj\nRiatst": [142, 260, -77, 14, 139],
   };
 
+  // Dialog that displays variants to deal with a country
   void showDiplomacyDialog(String countryName, BuildContext context) async {
     final String? result = await showDialog<String>(
       context: context,
@@ -31,7 +39,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
             side: BorderSide(color: Color.fromARGB(255, 63, 63, 63), width: 2),
             borderRadius: BorderRadius.all(Radius.circular(7.0)),
           ),
-          backgroundColor: const Color.fromARGB(237, 159, 145, 110), // Кастомний фон діалогу
+          backgroundColor: const Color.fromARGB(237, 159, 145, 110), 
           title: Row(
             children: [
               Text(
@@ -58,7 +66,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
     );
   }
 
-  // Помічник для створення варіантів з межами
+  // Creating variants with boundaries
   Widget buildOption(BuildContext context, String text, String countryName) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 3),
@@ -73,7 +81,12 @@ class _WorldMapPageState extends State<WorldMapPage> {
           // Play the sound effect immediately
           AudioService().playClick(); 
           if (text == "Declare war") {
-            Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => WarPage(countryName)));
+            Navigator.push(
+              context, 
+              MaterialPageRoute(
+                builder: (BuildContext context) => WarPage(countryName)
+              )
+            );
           } else if (text == "Propose trade") {
             executeTrade(countryName);
           } else {
@@ -87,7 +100,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
     );
   }
 
-
+  // Implementing trade logic
   void executeTrade(String countryName) {
     final countryData = currentArmySettings[countryName]!;
 
@@ -103,7 +116,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
     });
   }
 
-
+  // Implementing unification logic
   void executeUnion(String countryName) {
     final countryData = currentArmySettings[countryName]!;
 
@@ -138,14 +151,16 @@ class _WorldMapPageState extends State<WorldMapPage> {
             ),
 
             child: InteractiveViewer(
-              transformationController: transformationController, // pass the transformation controller
+              // pass the transformation controller
+              transformationController: transformationController, 
               onInteractionEnd: (details) {
                 setState(() {
-                  transformationController.toScene(Offset.zero); // return to normal size after scaling has ended
+                  // return to normal size after scaling has ended
+                  transformationController.toScene(Offset.zero); 
                 });
               },
-              minScale: 0.1, // min scale
-              maxScale: 5.0, // max scale
+              minScale: 0.1,
+              maxScale: 5.0,
               scaleEnabled: true,
               panEnabled: true,
               child: Stack(
@@ -165,18 +180,21 @@ class _WorldMapPageState extends State<WorldMapPage> {
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
-                          // Відображаємо PNG мітку, якщо країна захоплена
+                          // Display PNG label if country is captured
                           if (currentArmySettings[country.key]?.isConquired ?? false)
                             Opacity(
-                              opacity: 0.97, // Щоб мітка не перекривала назву повністю
+                              opacity: 0.97,
                               child: Image.asset(
-                                "assets/coquired_mark.png", // Ваша PNG мітка
-                                width: country.value[3] * 3, // Масштабуємо під розмір тексту
+                                "assets/coquired_mark.png",
+                                // Scale to fit the text size
+                                width: country.value[3] * 3, 
                               ),
                             ),
                           
                           TextButton(
-                            style: TextButton.styleFrom(backgroundColor: Colors.transparent),
+                            style: TextButton.styleFrom(
+                              backgroundColor: Colors.transparent
+                            ),
                             onPressed: () {
                               // Play the sound effect immediately
                               AudioService().playClick(); 
@@ -188,7 +206,9 @@ class _WorldMapPageState extends State<WorldMapPage> {
                                 country.key, 
                                 style: TextStyle(
                                   fontSize: country.value[3], 
-                                  color: Color.fromARGB(country.value[4].toInt(), 63, 63, 63),
+                                  color: Color.fromARGB(
+                                    country.value[4].toInt(), 63, 63, 63
+                                  ),
                                   fontFamily: "Monda-Bold"
                                 )
                               ),

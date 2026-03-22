@@ -13,11 +13,9 @@ String generateGameId() {
   return gameId;
 }
 
-
 // Format DateTime into human-readable string
 String formatDateTime(DateTime date) => 
   "${"${date.day}".length < 2 ? "0${date.day}-" : "${date.day}-"}${"${date.month}".length < 2 ? "0${date.month}-" : "${date.month}-"}${date.year} ${"${date.hour}".length < 2 ? "0${date.hour}:" : "${date.hour}:"}${"${date.minute}".length < 2 ? "0${date.minute}" : "${date.minute}"}";
-
 
 // Format long numbers in thousands, millions etc. 
 String formatLongNumber(var number, {bool isDouble = false}) {
@@ -35,7 +33,7 @@ String formatLongNumber(var number, {bool isDouble = false}) {
   return result; 
 }
 
-
+// Converts long numbers to short form like '100k', '1m' etc.
 String getShortNumberForm(var number) {
   if (number >= 1000000000) {
     return (number / 1000000000).toStringAsFixed(1) + "b";
@@ -50,29 +48,7 @@ String getShortNumberForm(var number) {
   }
 }
 
-
-/*Future newGameStats() async {
-  var gameStatsBox = await Hive.openBox<GameStats>("game_stats");
-  gameStatsBox.put(
-    "game_stats", 
-    GameStats(
-      stats: {
-        "exchange_amount": "1",
-        "": "",
-        "": "",
-        "": "",
-        "": "",
-        "": "",
-        "": "",
-        "": "",
-      }
-    )
-  );
-  gameStatsBox.close();
-}*/
-
-
-// Save game state 
+// Save current game state 
 Future saveGame({String playerName = ""}) async {
   for (Game i in gameBox.values) {
     if (i.gameId == currentGame.gameId) {
@@ -122,7 +98,6 @@ Future saveGame({String playerName = ""}) async {
   
 }
 
-
 // Display appBar stats
 Wrap stat(String asset, var displayableData) => Wrap(
     runAlignment: WrapAlignment.center,
@@ -138,18 +113,6 @@ Wrap stat(String asset, var displayableData) => Wrap(
       Image.asset(asset, height: 27, width: 34),
     ],
   );
-
-
-/*void showToastMessage(BuildContext context, String text) {
-  Fluttertoast.showToast(
-    msg: text,
-    toastLength: Toast.LENGTH_SHORT,
-    timeInSecForIosWeb: 1,
-    backgroundColor: const Color.fromARGB(255, 63, 63, 63),
-    textColor: const Color.fromARGB(255, 159, 145, 110),
-    fontSize: 16.0,
-  );  
-}*/
 
 // Back button
 SizedBox backButton(BuildContext context, {String asset = ''}) => SizedBox(
@@ -176,18 +139,15 @@ SizedBox backButton(BuildContext context, {String asset = ''}) => SizedBox(
           style: const TextStyle(
             fontFamily: "Monda-Bold",
             fontSize: 19,
-            color: Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+            color: Color.fromARGB(255, 205, 192, 68),
           ),
         ),
       ],
     )
-    
-   
     )
 );
 
-
-// Info iconButton
+// Info iconButton that displays tooltips
 Tooltip infoButton(String message, bool isDark) => Tooltip(
     textStyle: const TextStyle(
       color: Color.fromARGB(255, 63, 63, 63), 
@@ -214,8 +174,7 @@ Tooltip infoButton(String message, bool isDark) => Tooltip(
     )
   );
 
-
-// Create appBar
+// Standart appbar for game
 AppBar statsAppBar(BuildContext context) => AppBar(
     automaticallyImplyLeading: false,
     backgroundColor: const Color.fromARGB(255, 159, 145, 110),
@@ -227,6 +186,7 @@ AppBar statsAppBar(BuildContext context) => AppBar(
       runAlignment: WrapAlignment.spaceEvenly,
       spacing: MediaQuery.of(context).size.width / 8,
       children: [
+        // Player's name, ideology and reigning years
         Wrap(
           runAlignment: WrapAlignment.center,
           crossAxisAlignment: WrapCrossAlignment.start,
@@ -256,6 +216,7 @@ AppBar statsAppBar(BuildContext context) => AppBar(
           ],
         ),
 
+        // Player's stats
         Wrap(
           alignment: WrapAlignment.center,
           direction: Axis.vertical,
@@ -273,7 +234,7 @@ AppBar statsAppBar(BuildContext context) => AppBar(
     ),
   );
 
-
+// Returns boosts given by each ideology
 double getIdeologyBonus(String fractionName) {
   for (var i in currentIdeology.bonuses.keys) {
     if (i.contains(fractionName)) {
@@ -284,7 +245,7 @@ double getIdeologyBonus(String fractionName) {
   return 0.0;
 }
 
-// Create bottomNavigationBar
+// Standart bottom bar for game
 BottomAppBar bottomBar(BuildContext context) {
 
   return BottomAppBar(
@@ -450,7 +411,7 @@ BottomAppBar bottomBar(BuildContext context) {
   );
 }
 
-
+// Returns number of countries conquired by player on world map
 int getNumberOfConquiredCountries() {
   int counter = 0;
   for (ArmySettings i in countriesArmiesBox.values) {
@@ -462,7 +423,7 @@ int getNumberOfConquiredCountries() {
   return counter;
 }
 
-
+// Changing stats of player. Currently not in use
 Future changeGameStats(String stat, String newValue) async {
   Box<GameStats> gameStatsBox = await Hive.openBox("game_stats");
   if (gameStatsBox.getAt(0)!.stats.keys.contains(stat)) {

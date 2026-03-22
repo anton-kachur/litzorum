@@ -50,7 +50,7 @@ class _StartScreenState extends State<StartScreen> {
           AudioService().playClick();
           onPressed();
         },
-        // Use Stack to overlay translated text on top of the button asset
+        // Using of Stack to overlay translated text on top of the button asset
         icon: Stack(
           alignment: Alignment.center,
           children: [
@@ -67,7 +67,7 @@ class _StartScreenState extends State<StartScreen> {
               style: const TextStyle(
                 fontFamily: "Monda-Bold",
                 fontSize: 19,
-                color: Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+                color: Color.fromARGB(255, 205, 192, 68),
               ),
             ),
           ],
@@ -116,12 +116,6 @@ class _StartScreenState extends State<StartScreen> {
     label: "About".tr,
     assetPath: "assets/blank.png",
     onPressed: () {
-      /*Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (_) => const AboutPage(),
-        ),
-      );*/
     },
   );
 
@@ -141,8 +135,6 @@ class _StartScreenState extends State<StartScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //context.watch<TranslationService>();
-    
     return ValueListenableBuilder(
         valueListenable: settingsBox.listenable(),
         builder: (context, box, _) {
@@ -157,15 +149,14 @@ class _StartScreenState extends State<StartScreen> {
             child: Center(
               child: Column(
                 children: [
-                  // Main Game Logo
+                  // Game logo
                   Image.asset(
                     "assets/Litzorum.png",
                     width: MediaQuery.of(context).size.width / 4,
                     height: MediaQuery.of(context).size.height / 4,
                   ),
 
-                  
-
+                  // Game name
                   const Text(
                     "Litzórum",
                     style: TextStyle(
@@ -174,8 +165,9 @@ class _StartScreenState extends State<StartScreen> {
                     ),
                   ),
                   
-                  SizedBox(height: 20),
+                  const SizedBox(height: 20),
                   
+                  // Menu buttons
                   _newGameButton(context),
                   _continueButton(context),
                   _settingsButton(context),

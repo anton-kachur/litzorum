@@ -2,6 +2,10 @@ import 'package:litzorum/services/translation_service.dart';
 
 import 'services/shared_imports.dart';
 
+/// The battlefield screen where the player engages in combat with other countries.
+/// 
+/// Manages the visual representation of army stats (Air Defence, Frontline, Back),
+/// calculates turn-based battle damage, and handles victory or defeat logic.
 class WarPage extends StatefulWidget {
   final String countryName;
 
@@ -14,8 +18,7 @@ class WarPage extends StatefulWidget {
 class _WarPageState extends State<WarPage> {
   final Random random = Random();
 
-
-  // Create parameter
+  // Main parameters for battle
   Padding parameter(String asset, String headText, List<String> text, [bool isPlayer=true]) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -25,7 +28,7 @@ class _WarPageState extends State<WarPage> {
           runAlignment: WrapAlignment.end,
           children: [
             Container(
-              width: MediaQuery.of(context).size.width / 2.25,//1.24,
+              width: MediaQuery.of(context).size.width / 2.25,
               height: 96*(5/6),
               decoration: const BoxDecoration(
                 color: Color.fromARGB(255, 159, 145, 110),
@@ -41,16 +44,19 @@ class _WarPageState extends State<WarPage> {
                   Transform.flip(
                     flipX: isPlayer? false : true,
                     child: Column(
-                      crossAxisAlignment: isPlayer? CrossAxisAlignment.start : CrossAxisAlignment.end,
+                      crossAxisAlignment: isPlayer? CrossAxisAlignment.start : 
+                        CrossAxisAlignment.end,
                       children: [
                       Text(headText.tr, style: const TextStyle(
-                        fontSize: 16*(5/6), color: Color.fromARGB(255, 63, 63, 63),
+                        fontSize: 16*(5/6), 
+                        color: Color.fromARGB(255, 63, 63, 63),
                         fontFamily: "Monda-Bold",
                       )),
                       
                       for (String i in text) 
                         Text(i.tr, style: const TextStyle(
-                          fontSize: 16*(5/6), color: Color.fromARGB(255, 63, 63, 63),
+                          fontSize: 16*(5/6), 
+                          color: Color.fromARGB(255, 63, 63, 63),
                           fontFamily: "Monda",
                         )),
                       ]
@@ -66,7 +72,7 @@ class _WarPageState extends State<WarPage> {
     );
   }
 
-
+  // Creates battle parameters for each fraction like air_defence, frontline and back
   Widget battleParametersList([bool isPlayer = true]) => Column(
     children: [
       parameter(
@@ -92,7 +98,8 @@ class _WarPageState extends State<WarPage> {
     ]
   ); 
 
-
+  // Check if all countries conquired
+  // Important for the emergence of a military ending
   bool checkIfAllCountriesConquired() {
     int counter = 0;
     for (var i in currentArmySettings.values) {
@@ -101,7 +108,6 @@ class _WarPageState extends State<WarPage> {
 
     return counter == currentArmySettings.length ? true : false;
   }
-
 
   // Attack button
   SizedBox attackButton() => SizedBox(
@@ -119,37 +125,60 @@ class _WarPageState extends State<WarPage> {
           var player = currentArmySettings['Litzórum']!;
           double ideologyBonus = getIdeologyBonus("Army");
 
-          // Функція розрахунку втрат: повертає кількість загиблих юнітів
-          double calculateDamage(double attackers, double attackLv, double defenders, double defenseLv, {double defBonus = 0}) {
+          // Casualty calculation function: returns the number of units killed
+          double calculateDamage(
+            double attackers, double attackLv, double defenders, 
+            double defenseLv, {double defBonus = 0}
+          ) {
             if (attackers < 1.0) return 0;
 
-            // Співвідношення сил (наскільки атака сильніша за захист)
-            // Чим вища технологія (Level), тим ефективніший кожен солдат
+            // Power ratio (how much stronger the attack is than the defense)
+            // The higher the technology (Level), the more effective each soldier is.
             double techFactor = (attackLv + 1) / (defenseLv + 1 + defBonus);
             
-            // Базовий урон: атакуючі вбивають від 5% до 15% від своєї чисельності
-            // Множимо на techFactor, щоб сильніша армія завдавала більше шкоди
+            // Main damage: Attackers kill 5% to 15% of their number
+            // Multiply by techFactor so that a stronger army deals more damage
             double rawDamage = attackers * (0.05 + random.nextDouble() * 0.1) * techFactor;
 
-            // Обмежувач: не можна вбити за один раз більше, ніж 30% армії ворога 
-            // (щоб бій не закінчувався за 1 клік)
+            // Limiter: cannot kill more than 30% of the enemy army at once
+            // (so that the battle doesn't end in 1 click)
             double maxDamagePerTurn = defenders * 0.3;
             
             return rawDamage.clamp(0, maxDamagePerTurn);
           }
 
-          // 1. РАХУЄМО ВТРАТИ
-          // Гравець б'є ворога (враховуємо ідеологію гравця в атаку)
-          double enemyLossF = calculateDamage(player.frontlineAmount, currentGame.attackLevel, enemy.frontlineAmount, enemy.defenceLevel);
-          double enemyLossA = calculateDamage(player.airDefenceAmount, currentGame.attackLevel, enemy.airDefenceAmount, enemy.defenceLevel);
-          double enemyLossB = calculateDamage(player.backAmount, currentGame.attackLevel, enemy.backAmount, enemy.defenceLevel);
+          // 1. COUNTING LOSSES
+          // The player hits the enemy (we take into account the ideology of the 
+          // attacking player)
+          double enemyLossF = calculateDamage(
+            player.frontlineAmount, currentGame.attackLevel, 
+            enemy.frontlineAmount, enemy.defenceLevel
+          );
+          double enemyLossA = calculateDamage(
+            player.airDefenceAmount, currentGame.attackLevel, 
+            enemy.airDefenceAmount, enemy.defenceLevel
+          );
+          double enemyLossB = calculateDamage(
+            player.backAmount, currentGame.attackLevel, 
+            enemy.backAmount, enemy.defenceLevel
+          );
 
-          // Ворог б'є гравця (враховуємо ідеологію гравця в захист)
-          double playerLossF = calculateDamage(enemy.frontlineAmount, enemy.attackLevel, player.frontlineAmount, currentGame.defenceLevel, defBonus: ideologyBonus);
-          double playerLossA = calculateDamage(enemy.airDefenceAmount, enemy.attackLevel, player.airDefenceAmount, currentGame.defenceLevel, defBonus: ideologyBonus);
-          double playerLossB = calculateDamage(enemy.backAmount, enemy.attackLevel, player.backAmount, currentGame.defenceLevel, defBonus: ideologyBonus);
+          // The enemy hits the player (we take into account the player's 
+          // ideology in defense)
+          double playerLossF = calculateDamage(
+            enemy.frontlineAmount, enemy.attackLevel, player.frontlineAmount, 
+            currentGame.defenceLevel, defBonus: ideologyBonus
+          );
+          double playerLossA = calculateDamage(
+            enemy.airDefenceAmount, enemy.attackLevel, player.airDefenceAmount, 
+            currentGame.defenceLevel, defBonus: ideologyBonus
+          );
+          double playerLossB = calculateDamage(
+            enemy.backAmount, enemy.attackLevel, player.backAmount, 
+            currentGame.defenceLevel, defBonus: ideologyBonus
+          );
 
-          // 2. ЗАСТОСОВУЄМО ВТРАТИ
+          // 2. APPLY LOSSES
           enemy.frontlineAmount -= enemyLossF;
           enemy.airDefenceAmount -= enemyLossA;
           enemy.backAmount -= enemyLossB;
@@ -158,8 +187,9 @@ class _WarPageState extends State<WarPage> {
           player.airDefenceAmount -= playerLossA;
           player.backAmount -= playerLossB;
 
-          // 3. ПЕРЕВІРКА ПОРОГУ (1000 юнітів) ТА ПЕРЕМОГИ
-          // Якщо у когось менше 1000 хоча б в одному роді військ — поразка/перемога
+          // 3. THRESHOLD CHECK (100 UNITS) AND VICTORY
+          // If someone has less than 100 in at least one type of troops - 
+          // defeat/victory
           bool enemyDefeated = enemy.frontlineAmount < 100 || enemy.airDefenceAmount < 100 || enemy.backAmount < 100;
           bool playerDefeated = player.frontlineAmount < 100 || player.airDefenceAmount < 100 || player.backAmount < 100;
 
@@ -181,7 +211,6 @@ class _WarPageState extends State<WarPage> {
           } else if (playerDefeated) {
             player.armyAmount = (player.frontlineAmount + player.airDefenceAmount + player.backAmount);
             showWarResultDialog(true, context);
-            // Тут можна додати логіку штрафів для гравця
             saveGame();
           }
         });
@@ -194,7 +223,6 @@ class _WarPageState extends State<WarPage> {
         ),
       )
   );
-
 
   // Retreat button
   SizedBox retreatButton() => SizedBox(
@@ -218,7 +246,7 @@ class _WarPageState extends State<WarPage> {
   void showWarResultDialog(bool lose, BuildContext context) {
     showDialog(
       context: context,
-      barrierDismissible: false, // Користувач мусить натиснути кнопку
+      barrierDismissible: false,
       builder: (BuildContext context) {
         return SimpleDialog(
           shape: const RoundedRectangleBorder(
@@ -230,7 +258,7 @@ class _WarPageState extends State<WarPage> {
             lose 
               ? "${'YOU LOST TO'.tr} ${widget.countryName.toUpperCase()}\n${'Better luck next time'.tr}!" 
               : "${'YOU WON'.tr}!\n${widget.countryName.toUpperCase()} ${'is now part of Litzórum'.tr}",
-            textAlign: TextAlign.center, // Центрування тексту
+            textAlign: TextAlign.center,
             style: const TextStyle(
               color: Color.fromARGB(255, 63, 63, 63),
               fontFamily: "Monda-Bold",
@@ -253,16 +281,16 @@ class _WarPageState extends State<WarPage> {
                       onPressed: () {
                         // Play the sound effect immediately
                         AudioService().playClick(); 
-                        saveGame(); // Зберігаємо гру
-                        Navigator.of(context).pop(); // Закриваємо діалог
-                        Navigator.of(context).pop(); // Повертаємось на карту/попередній екран
+                        saveGame();
+                        Navigator.of(context).pop(); // closing dialog
+                        Navigator.of(context).pop(); 
                         Navigator.of(context).pop();
                         Navigator.of(context).pop();
-                        Navigator.of(context).pop();
+                        Navigator.of(context).pop(); // returning to main_screen
                         
                       },
                       child: Text(
-                        lose ? "Sakjemeh!" : "C̦eantu máre", // Назви кнопок
+                        lose ? "Sakjemeh!" : "C̦eantu máre", // buttons' names
                         style: const TextStyle(
                           color: Color.fromARGB(255, 159, 145, 110),
                           fontFamily: "Monda-Bold",
@@ -279,7 +307,6 @@ class _WarPageState extends State<WarPage> {
       },
     );
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -303,7 +330,6 @@ class _WarPageState extends State<WarPage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                //showWarResultDialog(false, context)
                 battleParametersList(),
                 battleParametersList(false)
               ],

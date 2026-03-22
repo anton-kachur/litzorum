@@ -2,6 +2,11 @@ import 'package:litzorum/services/translation_service.dart';
 
 import 'services/shared_imports.dart';
 
+/// The configuration screen for managing game preferences and audio settings.
+/// 
+/// Handles persistent storage of user settings via Hive, including 
+/// real-time volume adjustment for music and SFX, player profile 
+/// customization, and UI localization.
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
 
@@ -10,10 +15,10 @@ class SettingsPage extends StatefulWidget {
 }
 
 class _SettingsPageState extends State<SettingsPage> {
-  /// Local map to hold settings during the session.
+  // Local map to hold settings during the session.
   Map<String, String> settings = {};
   
-  /// Flag to prevent UI from rendering before data is loaded.
+  // Flag to prevent UI from rendering before data is loaded.
   bool _isLoaded = false;
 
   @override
@@ -45,10 +50,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   /// Builds an SFX volume control with a functional [Slider].
-  /// 
-  /// Uses the exact same UI structure as the music volume parameter.
   Widget _buildSfxVolumeParameter(String asset, String title) {
-    // Безопасно парсим громкость эффектов или ставим 0.5 по умолчанию
     double currentSfxVolume = double.tryParse(settings["sfx_volume"] ?? "0.5") ?? 0.5;
 
     return Padding(
@@ -283,9 +285,9 @@ class _SettingsPageState extends State<SettingsPage> {
   Widget _buildLanguageParameter(String asset, String title) {
     String currentLang = settings["language"] ?? "en";
     
-    // Отображаемое имя текущего языка
+    // Current language display name
     String langDisplay = currentLang == "en" ? "English" : 
-                        currentLang == "es" ? "Español" : "Deutsch"; // Пример для 3-го языка
+      currentLang == "es" ? "Español" : "Deutsch";
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
@@ -329,7 +331,7 @@ class _SettingsPageState extends State<SettingsPage> {
               ),
             ),
             
-            // КНОПКА ВЫБОРА ЯЗЫКА
+            // Set language button
             Column(
               children: [
                 PopupMenuButton<String>(
@@ -367,7 +369,7 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  // Хелпер для создания элементов меню в одном стиле
+  // Popup menu builder
   PopupMenuItem<String> _buildPopupItem(String label, String code) {
     return PopupMenuItem<String>(
       value: code,
@@ -440,7 +442,6 @@ class _SettingsPageState extends State<SettingsPage> {
             children: [
               _textParameter("assets/player_name.png", "Player's name".tr,
                       [settings["player_name"] ?? "Noname"]),
-              // Your existing name parameter logic here
               _buildVolumeParameter("assets/music.png", "Music".tr),
               _buildSfxVolumeParameter("assets/sound.png", "Sounds".tr),
               _buildLanguageParameter("assets/sound.png", "Language".tr),
