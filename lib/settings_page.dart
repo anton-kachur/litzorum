@@ -347,7 +347,16 @@ class _SettingsPageState extends State<SettingsPage> {
                   itemBuilder: (BuildContext context) => [
                     _buildPopupItem("English", "en"),
                     _buildPopupItem("Español", "es"),
-                    _buildPopupItem("Deutsch", "de"), // Добавляй сколько влезет
+                    _buildPopupItem("Deutsch", "de"),
+                    _buildPopupItem("Française", "fr"), 
+                    _buildPopupItem("Українська", "ua"),
+                    _buildPopupItem("Italino", "it"),
+                    _buildPopupItem("Polski", "pl"),
+                    _buildPopupItem("Português", "pt"),
+                    _buildPopupItem("Suomalainen", "fi"),
+                    _buildPopupItem("日本語", "ja"),
+                    _buildPopupItem("한국인", "ko"),
+                    _buildPopupItem("繁體中文", "zh-TW"),
                   ],
                 ),
               ]
