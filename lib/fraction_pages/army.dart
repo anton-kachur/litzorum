@@ -1,4 +1,5 @@
-import 'package:litzorum/shared_imports.dart';
+import 'package:litzorum/services/shared_imports.dart';
+import 'package:litzorum/services/translation_service.dart';
 
 class Army extends StatefulWidget {
   const Army({super.key});
@@ -52,7 +53,7 @@ class _ArmyState extends State<Army> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text(headText, style: const TextStyle(
+                    Text(headText.tr, style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
                       fontFamily: "Monda-Bold",
                     )),
@@ -252,53 +253,53 @@ class _ArmyState extends State<Army> {
               children: [
                 parameter(
                   "assets/world_map.png", "World map", 
-                  ["Countries conquired: ${getNumberOfConquiredCountries()}",
+                  ["${'Countries conquered'.tr}: ${getNumberOfConquiredCountries()}",
                   "${((getNumberOfConquiredCountries()*100)/currentArmySettings.length).round()}%"]
                 ),
                 parameter(
                   "assets/hq.png", "HQ", 
-                  ["Level: ${
+                  ["${'Level'.tr}: ${
                     currentGame.HQLevel < 10? 
                       "${double.parse(currentGame.HQLevel.toStringAsFixed(2))}" :
                       "MAX"}",
                     currentGame.HQLevel < 10? 
-                      "To next level: ${double.parse(((currentGame.HQLevel + 1.0).round() - currentGame.HQLevel ).toStringAsFixed(2))}" :
+                      "${'To next level'.tr}: ${double.parse(((currentGame.HQLevel + 1.0).round() - currentGame.HQLevel ).toStringAsFixed(2))}" :
                       ""
                   ]
                 ),
                 parameter(
                   "assets/attack.png", "Attack", 
-                  ["Level: ${
+                  ["${'Level'.tr}: ${
                     currentGame.attackLevel < 10?
                       "${double.parse(currentGame.attackLevel.toStringAsFixed(2))}" :
                       "MAX"}",
                     currentGame.attackLevel < 10? 
-                      "To next level: ${double.parse(((currentGame.attackLevel + 1.0).round() - currentGame.attackLevel ).toStringAsFixed(2))}" :
+                      "${'To next level'.tr}: ${double.parse(((currentGame.attackLevel + 1.0).round() - currentGame.attackLevel ).toStringAsFixed(2))}" :
                       ""
                   ]
                 ),
                 parameter(
                   "assets/defence.png", "Defence", 
-                  ["Level: ${
+                  ["${'Level'.tr}: ${
                     currentGame.defenceLevel < 10? 
                       "${double.parse(currentGame.defenceLevel.toStringAsFixed(2))}" :
                       "MAX"}",
                     currentGame.defenceLevel < 10? 
-                      "To next level: ${double.parse(((currentGame.defenceLevel + 1.0).round() - currentGame.defenceLevel ).toStringAsFixed(2))}" :
+                      "${'To next level'.tr}: ${double.parse(((currentGame.defenceLevel + 1.0).round() - currentGame.defenceLevel ).toStringAsFixed(2))}" :
                       ""
                   ]
                 ),
                 parameter(
                   "assets/air_defence.png", "Air defence", 
-                  ["Active personnel: ${getShortNumberForm(currentArmySettings['Litzórum']!.airDefenceAmount.round())}"]
+                  ["${'Active personnel'.tr}: ${getShortNumberForm(currentArmySettings['Litzórum']!.airDefenceAmount.round())}"]
                 ),
                 parameter(
                   "assets/frontline.png", "Frontline", 
-                  ["Active personnel: ${getShortNumberForm(currentArmySettings['Litzórum']!.frontlineAmount.round())}"]
+                  ["${'Active personnel'.tr}: ${getShortNumberForm(currentArmySettings['Litzórum']!.frontlineAmount.round())}"]
                 ),
                 parameter(
                   "assets/home_front.png", "Back", 
-                  ["Active personnel: ${getShortNumberForm(currentArmySettings['Litzórum']!.backAmount.round())}"]
+                  ["${'Active personnel'.tr}: ${getShortNumberForm(currentArmySettings['Litzórum']!.backAmount.round())}"]
                 ),
                 
                 backButton(context),

@@ -1,4 +1,5 @@
-import 'package:litzorum/shared_imports.dart';
+import 'package:litzorum/services/shared_imports.dart';
+import 'package:litzorum/services/translation_service.dart';
 
 class Industry extends StatefulWidget {
   const Industry({super.key});
@@ -47,7 +48,7 @@ class _IndustryState extends State<Industry> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text(headText, style: const TextStyle(
+                    Text(headText.tr, style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
                       fontFamily: "Monda-Bold",
                     )),
@@ -157,18 +158,18 @@ class _IndustryState extends State<Industry> {
               parameter(
                 "assets/heavy_industry.png", 
                 "Heavy industry", 
-                ["Factories: ${currentGame.heavyIndustryFactoriesNumber}", 
-                "Goods output: ${double.parse(currentGame.heavyIndustryGoodsOutput.toStringAsFixed(2))}"]),
+                ["${'Factories'.tr}: ${currentGame.heavyIndustryFactoriesNumber}", 
+                "${'Goods output'.tr}: ${double.parse(currentGame.heavyIndustryGoodsOutput.toStringAsFixed(2))}"]),
               parameter(
                 "assets/light_industry.png", 
                 "Light industry", 
-                ["Factories: ${currentGame.lightIndustryFactoriesNumber}", 
-                "Goods output: ${double.parse(currentGame.lightIndustryGoodsOutput.toStringAsFixed(2))}"]),
+                ["${'Factories'.tr}: ${currentGame.lightIndustryFactoriesNumber}", 
+                "${'Goods output'.tr}: ${double.parse(currentGame.lightIndustryGoodsOutput.toStringAsFixed(2))}"]),
               parameter(
                 "assets/agriculture.png", 
                 "Agriculture", 
-                ["Farms: ${currentGame.agricultureFarmsNumber}", 
-                "Goods output: ${double.parse(currentGame.agricultureFarmsGoodsOutput.toStringAsFixed(2))}"]),
+                ["${'Farms'.tr}: ${currentGame.agricultureFarmsNumber}", 
+                "${'Goods output'.tr}: ${double.parse(currentGame.agricultureFarmsGoodsOutput.toStringAsFixed(2))}"]),
 
               backButton(context),
             ]

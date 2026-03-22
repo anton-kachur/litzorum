@@ -1,4 +1,5 @@
-import 'package:litzorum/shared_imports.dart';
+import 'package:litzorum/services/shared_imports.dart';
+import 'package:litzorum/services/translation_service.dart';
 
 class Science extends StatefulWidget {
   const Science({super.key});
@@ -44,7 +45,7 @@ class _ScienceState extends State<Science> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text(headText, style: const TextStyle(
+                    Text(headText.tr, style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
                       fontFamily: "Monda-Bold",
                     )),
@@ -106,8 +107,8 @@ class _ScienceState extends State<Science> {
           child: Column(
             children: [
               parameter("assets/education.png", "Education", ["${double.parse(currentGame.educationLevel.toStringAsFixed(3))}%"]),
-              parameter("assets/research.png", "Research", ["Research centers: ${currentGame.researchCentersNumber}"]),
-              parameter("assets/big_projects.png", "Big projects", ["Already have: ${currentGame.bigProjects.length}"]),
+              parameter("assets/research.png", "Research", ["${'Research centers'.tr}: ${currentGame.researchCentersNumber}"]),
+              parameter("assets/big_projects.png", "Big projects", ["${'Already have'.tr}: ${currentGame.bigProjects.length}"]),
 
               backButton(context),
             ]

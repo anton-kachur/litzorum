@@ -1,4 +1,4 @@
-import 'shared_imports.dart';
+import 'services/shared_imports.dart';
 
 /// A page displayed at the end of the game session.
 /// 

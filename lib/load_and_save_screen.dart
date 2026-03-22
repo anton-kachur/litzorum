@@ -1,4 +1,6 @@
-import 'shared_imports.dart';
+import 'package:litzorum/services/translation_service.dart';
+
+import 'services/shared_imports.dart';
 
 class LoadSaveScreen extends StatefulWidget {
   const LoadSaveScreen({super.key});
@@ -74,7 +76,23 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
             deleteIcon = !deleteIcon; // Просто вмикаємо/вимикаємо хрестики
           }); 
         }, 
-        icon: Image.asset("assets/delete_saved_game_button.png"),
+        icon: Stack(
+          alignment: Alignment.center,
+          children: [
+            Image.asset(
+                "assets/blank.png",
+            ),
+
+            Text(
+              "Delete saved game".tr,
+              style: const TextStyle(
+                fontFamily: "Monda-Bold",
+                fontSize: 19,
+                color: Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+              ),
+            ),
+          ]
+        ) 
       )
     );
   }
@@ -282,7 +300,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
         ]
       ), 
       Text(
-        (date != null) ? "Id: $gameId\n$date" : "Empty Slot", 
+        (date != null) ? "Id: $gameId\n$date" : "Empty slot".tr, 
         style: const TextStyle(fontFamily: "Monda-Regular", fontSize: 10),
         textAlign: TextAlign.center,
       )
@@ -330,10 +348,26 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
                         padding: EdgeInsets.only(top: MediaQuery.of(context).size.height/30),
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent, 
-                        icon: Image.asset(
-                          scale: 2,
-                          "assets/back_to_menu_button.png"
-                        ), 
+                        icon: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Image.asset(
+                              scale: 2,
+                              "assets/blank.png"
+                            ), 
+
+                            Text(
+                              "Back to menu".tr,
+                              style: const TextStyle(
+                                fontFamily: "Monda-Bold",
+                                fontSize: 16,
+                                color: Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+                              ),
+                            ),
+                          ]
+                        ),
+                        
+                        
                         onPressed: () {
                           // Play the sound effect immediately
                           AudioService().playClick(); 

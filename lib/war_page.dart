@@ -1,4 +1,6 @@
-import 'shared_imports.dart';
+import 'package:litzorum/services/translation_service.dart';
+
+import 'services/shared_imports.dart';
 
 class WarPage extends StatefulWidget {
   final String countryName;
@@ -41,13 +43,13 @@ class _WarPageState extends State<WarPage> {
                     child: Column(
                       crossAxisAlignment: isPlayer? CrossAxisAlignment.start : CrossAxisAlignment.end,
                       children: [
-                      Text(headText, style: const TextStyle(
+                      Text(headText.tr, style: const TextStyle(
                         fontSize: 16*(5/6), color: Color.fromARGB(255, 63, 63, 63),
                         fontFamily: "Monda-Bold",
                       )),
                       
                       for (String i in text) 
-                        Text(i, style: const TextStyle(
+                        Text(i.tr, style: const TextStyle(
                           fontSize: 16*(5/6), color: Color.fromARGB(255, 63, 63, 63),
                           fontFamily: "Monda",
                         )),
@@ -226,8 +228,8 @@ class _WarPageState extends State<WarPage> {
           backgroundColor: const Color.fromARGB(237, 159, 145, 110),
           title: Text(
             lose 
-              ? "YOU LOST TO ${widget.countryName.toUpperCase()}\nBetter luck next time!" 
-              : "YOU WON!\n${widget.countryName.toUpperCase()} is now part of Litzórum",
+              ? "${'YOU LOST TO'.tr} ${widget.countryName.toUpperCase()}\n${'Better luck next time'.tr}!" 
+              : "${'YOU WON'.tr}!\n${widget.countryName.toUpperCase()} ${'is now part of Litzórum'.tr}",
             textAlign: TextAlign.center, // Центрування тексту
             style: const TextStyle(
               color: Color.fromARGB(255, 63, 63, 63),

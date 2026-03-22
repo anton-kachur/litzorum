@@ -1,4 +1,6 @@
-import 'shared_imports.dart';
+import 'package:litzorum/services/translation_service.dart';
+
+import 'services/shared_imports.dart';
 
 class ParamsPage extends StatefulWidget {
   final String mode;
@@ -177,7 +179,7 @@ class _ParamsPageState extends State<ParamsPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text(headText, style: const TextStyle(
+                    Text(headText.tr, style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
                       fontFamily: "Monda-Bold",
                     )),
@@ -295,7 +297,7 @@ class _ParamsPageState extends State<ParamsPage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text(headText, style: const TextStyle(
+                    Text(headText.tr, style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
                       fontFamily: "Monda-Bold",
                     )),
@@ -395,12 +397,17 @@ class _ParamsPageState extends State<ParamsPage> {
                 children: [
                   Image.asset(asset, height: 96, width: 96),
                   const SizedBox(width: 10),
-                  Column(
+                  Expanded(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text(headText, style: const TextStyle(
+                    Text(
+                      headText.tr, 
+                      softWrap: true,
+                      style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
                       fontFamily: "Monda-Bold",
+                      
                     )),
                     
                     Text("${text[0]}${text[1].substring(0, text[1].length - 6)}M", style: const TextStyle(
@@ -408,7 +415,7 @@ class _ParamsPageState extends State<ParamsPage> {
                       fontFamily: "Monda",
                     )),
                     
-                  ]),
+                  ])),
                 ],
               ),
             ),
@@ -494,26 +501,26 @@ class _ParamsPageState extends State<ParamsPage> {
                       if (widget.mode == "education") 
                         educationParameter(
                           "assets/school.png", "Schools", 
-                          ["Amount: ${currentGame.schoolsNumber}"]
+                          ["${'Amount'.tr}: ${currentGame.schoolsNumber}"]
                         ),
 
                       if (widget.mode == "education") 
                         educationParameter(
                           "assets/university.png", "Universities", 
-                          ["Amount: ${currentGame.universitiesNumber}"]
+                          ["${'Amount'.tr}: ${currentGame.universitiesNumber}"]
                         ),
 
                       if (widget.mode == "research") 
                         researchParameter(
                           "assets/research_center.png", "Research centers", 
-                          ["Amount: ${currentGame.researchCentersNumber}"]
+                          ["${'Amount'.tr}: ${currentGame.researchCentersNumber}"]
                         ),
 
                       if (widget.mode == "big_projects") 
                         for(var i in bigProjectsCosts.entries)
                           bigProjectsParameter(
                             "assets/big_project_${bigProjectsCosts.keys.toList().indexOf(i.key)+1}.png", i.key, 
-                            ["Cost: ", "${i.value}"]
+                            ["${'Cost'.tr}: ", "${i.value}"]
                           ),
 
                       backButton(context),

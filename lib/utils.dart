@@ -1,4 +1,6 @@
-import 'shared_imports.dart';
+import 'package:litzorum/services/translation_service.dart';
+
+import 'services/shared_imports.dart';
 
 // Generate id for new game
 String generateGameId() {
@@ -161,10 +163,26 @@ SizedBox backButton(BuildContext context, {String asset = ''}) => SizedBox(
       AudioService().playClick(); 
       Navigator.pop(context, true);
     }, 
-    icon: ClipRRect(
-      borderRadius: BorderRadius.circular(8.0),
-      child: Image.asset(asset == '' ? "assets/back_button.png" : "assets/$asset.png") 
-      ),
+    icon: Stack(
+      alignment: Alignment.center,
+      children: [
+        ClipRRect(
+          borderRadius: BorderRadius.circular(8.0),
+          child: Image.asset(asset == '' ? "assets/blank.png" : "assets/$asset.png") 
+        ),
+
+        Text(
+          "Back".tr,
+          style: const TextStyle(
+            fontFamily: "Monda-Bold",
+            fontSize: 19,
+            color: Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+          ),
+        ),
+      ],
+    )
+    
+   
     )
 );
 
@@ -225,7 +243,7 @@ AppBar statsAppBar(BuildContext context) => AppBar(
 
                   children: <TextSpan>[
                     TextSpan(
-                      text: "\nyears: ${double.parse(currentGame.reigningYears.toStringAsFixed(1))}", 
+                      text: "\n${'years'.tr}: ${double.parse(currentGame.reigningYears.toStringAsFixed(1))}", 
                       style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
                       fontFamily: "Monda",
@@ -283,10 +301,26 @@ BottomAppBar bottomBar(BuildContext context) {
         IconButton(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent, 
-          icon: Image.asset(
-            scale: 2,
-            "assets/back_to_menu_button_1.png"
-          ), 
+          icon: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                scale: 2,
+                "assets/blank_mini.png"
+              ), 
+
+              Text(
+                "Menu".tr,
+                style: TextStyle(
+                  fontFamily: "Monda-Bold",
+                  fontSize: settingsBox.values.first.settings["language"] == "de" ? 12 : 16,
+                  color: const Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+                ),
+              ),
+            ]
+          ),
+          
+          
           onPressed: () {
             // Play the sound effect immediately
             AudioService().playClick(); 
@@ -298,10 +332,25 @@ BottomAppBar bottomBar(BuildContext context) {
         IconButton(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
-          icon: Image.asset(
-            scale: 2,
-            "assets/save_progress_button_1.png"
-          ), 
+          icon: Stack(
+            alignment: Alignment.center,
+            children: [
+              Image.asset(
+                scale: 2,
+                "assets/blank_mini.png"
+              ), 
+
+              Text(
+                "Save".tr,
+                style: TextStyle(
+                  fontFamily: "Monda-Bold",
+                  fontSize: settingsBox.values.first.settings["language"] == "de" ? 12 : 16,
+                  color: const Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+                ),
+              ),
+            ]
+          ),
+              
           onPressed: () {
             // Play the sound effect immediately
             AudioService().playClick(); 

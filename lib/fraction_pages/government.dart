@@ -1,4 +1,5 @@
-import 'package:litzorum/shared_imports.dart';
+import 'package:litzorum/services/shared_imports.dart';
+import 'package:litzorum/services/translation_service.dart';
 
 class Government extends StatefulWidget {
   const Government({super.key});
@@ -69,7 +70,7 @@ class _GovernmentState extends State<Government> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
 
-                      Text(headText, style: const TextStyle(
+                      Text(headText.tr, style: const TextStyle(
                         fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
                         fontFamily: "Monda-Bold",
                       )),
@@ -298,12 +299,12 @@ class _GovernmentState extends State<Government> {
                       ),
                       parameter(
                         "assets/money.png", "Bank of Litzórum", 
-                        ["Budget: ${formatLongNumber(currentGame.budget, isDouble: true)}", 
-                        "Exchange rate: ${currentGame.exchangeRate}"]
+                        ["${"Budget".tr}: ${formatLongNumber(currentGame.budget, isDouble: true)}", 
+                        "${"Exchange rate".tr}: ${currentGame.exchangeRate}"]
                       ),
                       parameter(
                         "assets/exchange.png", "Exchange", 
-                        ["Goods for exchange:", "${currentgameStats.stats["exchange_amount"]}"], 
+                        ["${"Goods for exchange".tr}:", "${currentgameStats.stats["exchange_amount"]}"], 
                       ),
 
                       backButton(context),

@@ -1,41 +1,224 @@
-import 'package:google_mlkit_translation/google_mlkit_translation.dart';
+import 'package:litzorum/main.dart';
 
-class TranslationService extends ChangeNotifier {
-  late OnDeviceTranslator _translator;
-  bool _isReady = false;
-  TranslateLanguage _targetLanguage = TranslateLanguage.russian;
+class TranslationService {
+  static const Map<String, Map<String, String>> _translations = {
+    'en': {
+      'New game': 'New game',
+      'Continue': 'Continue',
+      'Settings': 'Settings',
+      'About': 'About',
+      'Quit': 'Quit',
+      'Music': 'Music',
+      'Sounds': 'Sounds',
+      'Player\'s name': 'Player\'s name',
+      'Language': 'Language',
+      'Back': 'Back',
+      'Back to menu': 'Back to menu',
+      'Delete saved game': 'Delete saved game',
+      'Empty slot': 'Empty slot',
+      'Menu': 'Menu',
+      'Save': 'Save',
+      'GOVERNMENT': 'GOVERNMENT', 
+      'PEOPLE': 'PEOPLE',
+      'INDUSTRY': 'INDUSTRY',
+      'SCIENCE': 'SCIENCE',
+      'ARMY': 'ARMY',
+      'CULTURE': 'CULTURE',
+      'years': 'years',
+      'Ideology': 'Ideology',
+      "Leader's popularity": "Leader's popularity",
+      'Population': 'Population',
+      'Army': 'Army',
+      'Bank of Litzórum': 'Bank of Litzórum',
+      'Exchange': 'Exchange',
+      'Budget': 'Budget',
+      'Exchange rate': 'Exchange rate',
+      'Goods for exchange': 'Goods for exchange',
+      'Education level': 'Education level',
+      'Purchasing power': 'Purchasing power',
+      'Life quality': 'Life quality',
+      'Education': 'Education',
+      'Research': 'Research',
+      'Big projects': 'Big projects',
+      'Heavy industry': 'Heavy industry',
+      'Light industry': 'Light industry',
+      'Agriculture': 'Agriculture',
+      'Factories': 'Factories',
+      'Farms': 'Farms',
+      'Goods output': 'Goods output',
+      'Research centers': 'Research centers',
+      'Already have': 'Already have',
+      'Level': 'Level',
+      'To next level': 'To next level',
+      'World map': 'World map',
+      'HQ': 'HQ',
+      'Attack': 'Attack',
+      'Defence': 'Defence',
+      'Air defence': 'Air defence',
+      'Frontline': 'Frontline',
+      'Active personnel': 'Active personnel',
+      'YOU LOST TO': 'YOU LOST TO',
+      'YOU WON': 'YOU WON',
+      'Better luck next time': 'Better luck next time',
+      'is now part of Litzórum': 'is now part of Litzórum',
+      'Amount': 'Amount',
+      'Schools': 'Schools',
+      'Universities': 'Universities',
+      'Cost': 'Cost',
+      "Mission \"Integra\"": "Mission \"Integra\"",
+      'Large Hadron Collider': 'Large Hadron Collider',
+      'Air Energy Plant': 'Air Energy Plant',
+      'Human Genome Storage': 'Human Genome Storage',
+      'Countries conquered': 'Countries conquered',
+    },
+    'es': {
+      'New game': 'Nueva partida',
+      'Continue': 'Continuar',
+      'Settings': 'Ajustes',
+      'About': 'Acerca de',
+      'Quit': 'Salir',
+      'Music': 'Música',
+      'Sounds': 'Sonidos',
+      "Player's name": 'Nombre del jugador',
+      'Language': 'Idioma',
+      'Back': 'Atrás',
+      'Back to menu': 'Volver al menú',
+      'Delete saved game': 'Eliminar partida guardada',
+      'Empty slot': 'Espacio vacío',
+      'Menu': 'Menú',
+      'Save': 'Ahorrar',
+      'GOVERNMENT': 'GOBIERNO', 
+      'PEOPLE': 'POBLACIÓN',
+      'INDUSTRY': 'INDUSTRIA',
+      'SCIENCE': 'CIENCIA',
+      'ARMY': 'EJÉRCITO',
+      'CULTURE': 'CULTURA',
+      'years': 'años',
+      'Ideology': 'Ideología',
+      "Leader's popularity": "Popularidad del líder",
+      'Population': 'Población',
+      'Army': 'Ejército',
+      'Bank of Litzórum': 'Banco de Litzórum',
+      'Exchange': 'Cambio',
+      'Budget': 'Presupuesto',
+      'Exchange rate': 'Tipo de cambio',
+      'Goods for exchange': 'Por intercambio',
+      'Education level': 'Nivel educativo',
+      'Purchasing power': 'Poder adquisitivo',
+      'Life quality': 'Calidad de vida',
+      'Education': 'Educación',
+      'Research': 'Investigación',
+      'Big projects': 'Grandes proyectos',
+      'Heavy industry': 'Industria pesada',
+      'Light industry': 'Industria ligera',
+      'Agriculture': 'Agricultura',
+      'Factories': 'Fábricas',
+      'Farms': 'Granjas',
+      'Goods output': 'Producción',
+      'Research centers': 'Centros',
+      'Already have': 'Ya tengo',
+      'Level': 'Nivel',
+      'To next level': 'Al siguiente nivel',
+      'World map': 'Mapa del mundo',
+      'HQ': 'Sede',
+      'Attack': 'Ataque',
+      'Defence': 'Defensa',
+      'Air defence': 'Defensa aérea',
+      'Frontline': 'Primera línea',
+      'Active personnel': 'Personal activo',
+      'YOU LOST TO': 'PERDISTE CONTRA',
+      'YOU WON': '¡GANASTE!',
+      'Better luck next time': 'Mejor suerte la próxima vez',
+      'is now part of Litzórum': 'ahora forma parte de Litzórum',
+      'Amount': 'Cantidad',
+      'Schools': 'Escuelas',
+      'Universities': 'Universidades',
+      'Cost': 'Costo',
+      "Mission \"Integra\"": "Misión \"Integra\"",
+      'Large Hadron Collider': 'Gran Colisionador de Hadrones',
+      'Air Energy Plant': 'Central de energía atmosférica',
+      'Human Genome Storage': 'Almacenamiento del genoma humano',
+      'Countries conquered': 'Países conquistados',
+    },
+    'de': {
+      'New game': 'Neues Spiel',
+      'Continue': 'Fortsetzen',
+      'Settings': 'Einstellungen',
+      'About': 'Über',
+      'Quit': 'Beenden',
+      'Music': 'Musik',
+      'Sounds': 'Geräusche',
+      "Player's name": 'Spielername',
+      'Language': 'Sprache',
+      'Back': 'Zurück',
+      'Back to menu': 'Zurück zum Menü',
+      'Delete saved game': 'Spielstand löschen',
+      'Empty slot': 'Leerer Platz',
+      'Menu': 'Speisekarte',
+      'Save': 'Speichern',
+      'GOVERNMENT': 'REGIERUNG', 
+      'PEOPLE': 'VOLK',
+      'INDUSTRY': 'INDUSTRIE',
+      'SCIENCE': 'WISSENSCHAFT',
+      'ARMY': 'ARMEE',
+      'CULTURE': 'KULTUR',
+      'years': 'jahre',
+      'Ideology': 'Ideologie',
+      "Leader's popularity": "Popularität des Anführers",
+      'Population': 'Bevölkerung',
+      'Army': 'Armee',
+      'Bank of Litzórum': 'Bank von Litzórum',
+      'Exchange': 'Börse',
+      'Budget': 'Budget',
+      'Exchange rate': 'Wechselkurs',
+      'Goods for exchange': 'Tauschwaren',
+      'Education level': 'Bildungsniveau',
+      'Purchasing power': 'Kaufkraft',
+      'Life quality': 'Lebensqualität',
+      'Education': 'Ausbildung',
+      'Research': 'Forschung',
+      'Big projects': 'Große Projekte',
+      'Heavy industry': 'Schwerindustrie',
+      'Light industry': 'Leichtindustrie',
+      'Agriculture': 'Landwirtschaft',
+      'Factories': 'Fabriken',
+      'Farms': 'Bauernhöfe',
+      'Goods output': 'Produktion',
+      'Research centers': 'Forschungszentren',
+      'Already have': 'Habe ich bereits',
+      'Level': 'Ebene',
+      'To next level': 'Zur nächsten Ebene',
+      'World map': 'Weltkarte',
+      'HQ': 'Hauptsitz',
+      'Attack': 'Angriff',
+      'Defence': 'Verteidigung',
+      'Air defence': 'Luftverteidigung',
+      'Frontline': 'Frontlinie',
+      'Active personnel': 'Aktives Personal',
+      'YOU LOST TO': 'DU HAST VERLOREN GEGEN',
+      'YOU WON': 'DU HAST GEWONNEN',
+      'Better luck next time': "Beim nächsten Mal klappt's bestimmt besser",
+      'is now part of Litzórum': 'ist jetzt Teil von Litzórum',
+      'Amount': 'Menge',
+      'Schools': 'Schulen',
+      'Universities': 'Universitäten',
+      'Cost': 'Kosten',
+      "Mission \"Integra\"": "Mission \"Integra\"",
+      'Large Hadron Collider': 'Großer Hadronen-Collider',
+      'Air Energy Plant': 'Luftenergieanlage',
+      'Human Genome Storage': 'Speicherung des menschlichen Genoms',
+      'Countries conquered': 'Eroberte Länder',
+    },
+  };
 
-  bool get isReady => _isReady;
+  static String translate(String key) {
+    final settings = settingsBox.get("settings0");
+    final String lang = settings?.settings["language"] ?? "en";
 
-  TranslationService() {
-    _initTranslator();
+    return _translations[lang]?[key] ?? key;
   }
+}
 
-  Future<void> _initTranslator() async {
-    // Проверяем/скачиваем модель (нужен интернет 1 раз)
-    final modelManager = OnDeviceTranslatorModelManager();
-    final bool isDownloaded = await modelManager.isModelDownloaded(_targetLanguage.code);
-    
-    if (!isDownloaded) {
-      await modelManager.downloadModel(_targetLanguage.code);
-    }
-
-    _translator = OnDeviceTranslator(
-      sourceLanguage: TranslateLanguage.english,
-      targetLanguage: _targetLanguage,
-    );
-    _isReady = true;
-    notifyListeners();
-  }
-
-  Future<String> translate(String text) async {
-    if (!_isReady) return text;
-    return await _translator.translateText(text);
-  }
-
-  @override
-  void dispose() {
-    _translator.close();
-    super.dispose();
-  }
+extension TranslationExtension on String {
+  String get tr => TranslationService.translate(this);
 }

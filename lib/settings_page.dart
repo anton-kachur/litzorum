@@ -1,4 +1,6 @@
-import 'shared_imports.dart';
+import 'package:litzorum/services/translation_service.dart';
+
+import 'services/shared_imports.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -278,6 +280,98 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
+  Widget _buildLanguageParameter(String asset, String title) {
+    String currentLang = settings["language"] ?? "en";
+    
+    // Отображаемое имя текущего языка
+    String langDisplay = currentLang == "en" ? "English" : 
+                        currentLang == "es" ? "Español" : "Deutsch"; // Пример для 3-го языка
+
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 10),
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        height: 96,
+        decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 63, 63, 63),
+            borderRadius: BorderRadius.all(Radius.circular(10))),
+        child: Row(
+          children: [
+            Container(
+              width: MediaQuery.of(context).size.width / 1.24,
+              height: 96,
+              decoration: const BoxDecoration(
+                  color: Color.fromARGB(255, 159, 145, 110),
+                  borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10), bottomLeft: Radius.circular(10))),
+              child: Row(
+                children: [
+                  Image.asset(asset, height: 96, width: 96),
+                  const SizedBox(width: 10),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title.tr,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Color.fromARGB(255, 63, 63, 63),
+                            fontFamily: "Monda-Bold",
+                          )),
+                      Text(langDisplay,
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Color.fromARGB(255, 63, 63, 63),
+                            fontFamily: "Monda",
+                          )),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            
+            // КНОПКА ВЫБОРА ЯЗЫКА
+            Column(
+              children: [
+                PopupMenuButton<String>(
+                  color: const Color.fromARGB(255, 159, 145, 110), // Цвет меню под твой стиль
+                  icon: Image.asset("assets/edit_icon.png", height: 22),
+                  offset: const Offset(0, 40), // Чтобы меню выпадало чуть ниже
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                  onSelected: (String code) {
+                    AudioService().playClick();
+                    setState(() {
+                      settings["language"] = code;
+                    });
+                    saveSettings(settings["player_name"]!);
+                  },
+                  itemBuilder: (BuildContext context) => [
+                    _buildPopupItem("English", "en"),
+                    _buildPopupItem("Español", "es"),
+                    _buildPopupItem("Deutsch", "de"), // Добавляй сколько влезет
+                  ],
+                ),
+              ]
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  // Хелпер для создания элементов меню в одном стиле
+  PopupMenuItem<String> _buildPopupItem(String label, String code) {
+    return PopupMenuItem<String>(
+      value: code,
+      child: Text(
+        label,
+        style: const TextStyle(
+          color: Color.fromARGB(255, 63, 63, 63),
+          fontFamily: "Monda-Bold",
+        ),
+      ),
+    );
+  }
+
   /// Displays an [AlertDialog] to edit the player's name.
   void _showNameEditDialog() {
     showDialog(
@@ -335,12 +429,13 @@ class _SettingsPageState extends State<SettingsPage> {
           padding: const EdgeInsets.fromLTRB(15, 40, 15, 15),
           child: Column(
             children: [
-              _textParameter("assets/player_name.png", "Player's name",
+              _textParameter("assets/player_name.png", "Player's name".tr,
                       [settings["player_name"] ?? "Noname"]),
               // Your existing name parameter logic here
-              _buildVolumeParameter("assets/music.png", "Music"),
-              _buildSfxVolumeParameter("assets/sound.png", "Sounds"),
-              const Spacer(),
+              _buildVolumeParameter("assets/music.png", "Music".tr),
+              _buildSfxVolumeParameter("assets/sound.png", "Sounds".tr),
+              _buildLanguageParameter("assets/sound.png", "Language".tr),
+              const SizedBox(height: 20),
               backButton(context),
             ],
           ),

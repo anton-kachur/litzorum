@@ -1,4 +1,6 @@
-import 'shared_imports.dart';
+import 'package:litzorum/services/translation_service.dart';
+
+import 'services/shared_imports.dart';
 
 /// The initial screen of the game, providing access to main menu options.
 /// 
@@ -30,170 +32,162 @@ class _StartScreenState extends State<StartScreen> {
     // Apply the preferred volume before playing
     await AudioService().setVolume(volume);
     await AudioService().playMainTheme();
-    //await audioService.playMainTheme();
-
   }
 
-  /// Builds the 'New Game' button to initiate a fresh session.
-  SizedBox _newGameButton(BuildContext context) => SizedBox(
-    height: 75, width: 300,
-  
-    child: IconButton(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-
-      onPressed: () {
-        // Play the sound effect immediately
-        AudioService().playClick(); 
-        navigatorKey.currentState?.push(
-          MaterialPageRoute(
-            builder:(BuildContext context) => const LoadSaveScreen()
-          )
-        );
-      }, 
-      icon: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Image.asset("assets/new_game.png")
+  /// Builds a menu button with a background image and an overlaid translated label.
+  Widget _menuButton({
+    required String label, 
+    required String assetPath, 
+    required VoidCallback onPressed,
+  }) {
+    return SizedBox(
+      height: 75,
+      width: 300,
+      child: IconButton(
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        onPressed: () {
+          AudioService().playClick();
+          onPressed();
+        },
+        // Use Stack to overlay translated text on top of the button asset
+        icon: Stack(
+          alignment: Alignment.center,
+          children: [
+            // Background image without text
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8.0),
+              child: Image.asset(
+                assetPath, 
+              ),
+            ),
+            // Translated text layer
+            Text(
+              label,
+              style: const TextStyle(
+                fontFamily: "Monda-Bold",
+                fontSize: 19,
+                color: Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+              ),
+            ),
+          ],
         ),
-      )
+      ),
     );
+  }
 
-  /// Builds the 'Continue' button to resume the last saved session.
-  SizedBox _continueButton(BuildContext context) => SizedBox(
-    height: 75, width: 300,
-  
-    child: IconButton(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
+  /// Builds the 'New Game' button.
+  Widget _newGameButton(BuildContext context) => _menuButton(
+    label: "New game".tr,
+    assetPath: "assets/blank.png",
+    onPressed: () {
+      navigatorKey.currentState?.push(
+        MaterialPageRoute(builder: (_) => const LoadSaveScreen()),
+      );
+    },
+  );
 
-      onPressed: () {
-        // Play the sound effect immediately
-        AudioService().playClick(); 
-        Navigator.push(
-          context, 
-          MaterialPageRoute(builder: 
-            (BuildContext context) => const LoadSaveScreen()
-          )
-        );
-      }, 
-      icon: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Image.asset("assets/continue.png")
+  /// Builds the 'Continue' button.
+  Widget _continueButton(BuildContext context) => _menuButton(
+    label: "Continue".tr,
+    assetPath: "assets/blank.png",
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const LoadSaveScreen()),
+      );
+    },
+  );
+
+  /// Builds the 'Settings' button.
+  Widget _settingsButton(BuildContext context) => _menuButton(
+    label: "Settings".tr,
+    assetPath: "assets/blank.png",
+    onPressed: () {
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const SettingsPage()),
+      );
+    },
+  );
+
+  /// Builds the 'About' button.
+  Widget _aboutButton(BuildContext context) => _menuButton(
+    label: "About".tr,
+    assetPath: "assets/blank.png",
+    onPressed: () {
+      /*Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (_) => const AboutPage(),
         ),
-      ),  
-    );
+      );*/
+    },
+  );
 
-  /// Builds the 'Settings' button to navigate to the options menu.
-  SizedBox _settingsButton(BuildContext context) => SizedBox(
-    height: 75, width: 300,
-  
-    child: IconButton(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-
-      iconSize: MediaQuery.of(context).size.width /2,
-      onPressed: () {
-        // Play the sound effect immediately
-        AudioService().playClick(); 
-        Navigator.push(context, 
-          MaterialPageRoute(builder: 
-            (BuildContext context) => const SettingsPage()
-          )
-        );
-      }, 
-      icon: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Image.asset("assets/settings.png")
-        ),
-      )
-    );
-
-  /// Builds the 'About' button which currently pops the context.
-  SizedBox _aboutButton(BuildContext context) => SizedBox(
-    height: 75, width: 300,
-  
-    child: IconButton(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-
-      iconSize: MediaQuery.of(context).size.width /2,
-      onPressed: () {
-        // Play the sound effect immediately
-        AudioService().playClick(); 
-        Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const EndingPage(type: "uberhedonism")));
-      }, 
-      icon: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Image.asset("assets/about.png")
-        ),
-      )
-    );
-
-  /// Builds the 'Quit' button to close all Hive boxes and exit the app.
-  SizedBox _quitButton(BuildContext context) => SizedBox(
-    height: 75, width: 300,
-  
-    child: IconButton(
-      splashColor: Colors.transparent,
-      highlightColor: Colors.transparent,
-      alignment: Alignment.center,
-
-      iconSize: MediaQuery.of(context).size.width /2,
-      onPressed: () {
-        // Play the sound effect immediately
-        AudioService().playClick(); 
-        gameBox.close();
-        ideologiesBox.close();
-        countriesArmiesBox.close();
-        gameStatsBox.close();
-        settingsBox.close();
-        exit(0);
-      }, 
-      icon: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Image.asset("assets/quit.png")
-        ),
-      )
-    );
+  /// Builds the 'Quit' button.
+  Widget _quitButton(BuildContext context) => _menuButton(
+    label: "Quit".tr,
+    assetPath: "assets/blank.png",
+    onPressed: () {
+      gameBox.close();
+      ideologiesBox.close();
+      countriesArmiesBox.close();
+      gameStatsBox.close();
+      settingsBox.close();
+      exit(0);
+    },
+  );
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 173, 173, 173),
-      
-      body: DecoratedBox(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/background.png"), fit: BoxFit.cover),
-        ),
-        child: Center(
-          child: Column(
-            children: [
-              // Main Game Logo
-              Image.asset(
-                "assets/Litzorum.png", 
-                width: MediaQuery.of(context).size.width / 4, 
-                height: MediaQuery.of(context).size.height / 4
-              ),
+    //context.watch<TranslationService>();
+    
+    return ValueListenableBuilder(
+        valueListenable: settingsBox.listenable(),
+        builder: (context, box, _) {
+          return Scaffold(
+          backgroundColor: const Color.fromARGB(255, 173, 173, 173),
+          
+          body: DecoratedBox(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage("assets/background.png"), fit: BoxFit.cover),
+            ),
+            child: Center(
+              child: Column(
+                children: [
+                  // Main Game Logo
+                  Image.asset(
+                    "assets/Litzorum.png",
+                    width: MediaQuery.of(context).size.width / 4,
+                    height: MediaQuery.of(context).size.height / 4,
+                  ),
 
-              const Text(
-                "Litzórum",
-                style: TextStyle(
-                  fontFamily: "Monda-Bold",
-                  fontSize: 25
-                )
-              ),
+                  
 
-              _newGameButton(context),
-              _continueButton(context),
-              _settingsButton(context),
-              _aboutButton(context),
-              _quitButton(context)
-              
-            ]
-          ), 
-        )
-      )      
+                  const Text(
+                    "Litzórum",
+                    style: TextStyle(
+                      fontFamily: "Monda-Bold",
+                      fontSize: 25,
+                    ),
+                  ),
+                  
+                  SizedBox(height: 20),
+                  
+                  _newGameButton(context),
+                  _continueButton(context),
+                  _settingsButton(context),
+                  _aboutButton(context),
+                  _quitButton(context)
+                  
+                ]
+              ), 
+            )
+          )      
+        );
+      }
     );
   }
 }

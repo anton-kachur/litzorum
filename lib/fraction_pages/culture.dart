@@ -1,4 +1,5 @@
-import 'package:litzorum/shared_imports.dart';
+import 'package:litzorum/services/shared_imports.dart';
+import 'package:litzorum/services/translation_service.dart';
 
 class Culture extends StatefulWidget {
   const Culture({super.key});
@@ -53,7 +54,7 @@ class _CultureState extends State<Culture> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                    Text(headText, style: const TextStyle(
+                    Text(headText.tr, style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
                       fontFamily: "Monda-Bold",
                     )),
@@ -159,17 +160,17 @@ class _CultureState extends State<Culture> {
 
               parameter(
                 "assets/overall_culture.png", "Overall culture", 
-                ["Level: ${double.parse(currentGame.cultureLevel.toStringAsFixed(2))}"]
+                ["${'Level'.tr}: ${double.parse(currentGame.cultureLevel.toStringAsFixed(2))}"]
               ),
               parameter(
                 "assets/high_culture.png", "High culture", 
-                ["Level: ${double.parse(currentGame.highCultureLevel.toStringAsFixed(1))}",
-                "To next level: ${double.parse((currentGame.highCultureLevel.ceil() - currentGame.highCultureLevel ).toStringAsFixed(1))}"]
+                ["${'Level'.tr}: ${double.parse(currentGame.highCultureLevel.toStringAsFixed(1))}",
+                "${'To next level'.tr}: ${double.parse((currentGame.highCultureLevel.ceil() - currentGame.highCultureLevel ).toStringAsFixed(1))}"]
               ),
               parameter(
                 "assets/mass_culture.png", "Mass culture", 
-                ["Level: ${double.parse(currentGame.massCultureLevel.toStringAsFixed(1))}",
-                "To next level: ${(currentGame.massCultureLevel.ceil() - currentGame.massCultureLevel ).toStringAsFixed(1)}"]
+                ["${'Level'.tr}: ${double.parse(currentGame.massCultureLevel.toStringAsFixed(1))}",
+                "${'To next level'.tr}: ${(currentGame.massCultureLevel.ceil() - currentGame.massCultureLevel ).toStringAsFixed(1)}"]
               ),
 
               backButton(context),

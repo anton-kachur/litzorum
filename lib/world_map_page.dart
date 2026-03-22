@@ -1,4 +1,4 @@
-import 'shared_imports.dart';
+import 'services/shared_imports.dart';
 
 class WorldMapPage extends StatefulWidget {
   const WorldMapPage({super.key});

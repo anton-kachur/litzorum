@@ -1,4 +1,4 @@
-import 'shared_imports.dart';
+import 'services/shared_imports.dart';
 
 class GameStatsPage extends StatefulWidget {
   const GameStatsPage({super.key});

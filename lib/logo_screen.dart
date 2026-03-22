@@ -1,10 +1,13 @@
-import 'shared_imports.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:litzorum/services/shared_imports.dart' show StatelessWidget, BuildContext, Widget, StartScreen, LoadSaveScreen, Government, People, Industry, Science, Army, Culture, MainScreen, StatefulWidget, State, TickerProviderStateMixin, AnimationController, Animation, TickerCanceled, Color, settingsBox, navigatorKey, Colors, ThemeData, MaterialApp, ValueListenableBuilder, Curves, CurvedAnimation, WidgetsBinding, debugPrint, MainAxisAlignment, Image, MediaQuery, Column, FadeTransition, Center, Scaffold;
 
 class LoadingLogoScreen extends StatelessWidget {
   const LoadingLogoScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    //context.watch<TranslationService>();
+    
     return MaterialApp(
       navigatorKey: navigatorKey,
       debugShowCheckedModeBanner: false,
@@ -83,6 +86,8 @@ class _StartLoadingState extends State<StartLoading> with TickerProviderStateMix
 
   @override
   Widget build(BuildContext context) {
+    //context.watch<TranslationService>();
+
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 45, 45, 45),
      

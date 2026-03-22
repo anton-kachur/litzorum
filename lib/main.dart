@@ -1,6 +1,7 @@
-import 'shared_imports.dart';
+import 'services/shared_imports.dart';
 
 final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+//late TranslationService translationService;
 late Box<Game> gameBox;
 late Box<Ideology> ideologiesBox;
 late Box<ArmySettings> countriesArmiesBox;
@@ -48,11 +49,15 @@ Future<void> main() async {
   if (settingsBox.isEmpty) {
     settingsBox.put(
       "settings0", 
-      Settings(
-        settings: {"player_name": "Noname"}
-      )
+      Settings(settings: {"player_name": "Immarhant Koljtwasser", "music_volume": "0.8", "sfx_volume": "1.0", "language": "en"})
     );
   }
+
+  for (var i in settingsBox.values) {
+    print(i.toString());
+  }
+
+  //translationService = TranslationService(); 
 
   //============================================================================
   // Ideologies ================================================================
@@ -92,5 +97,7 @@ Future<void> main() async {
   //gameBox.clear();
   //countriesArmiesBox.clear();
 
-  runApp(const LoadingLogoScreen());
+  runApp(
+    const LoadingLogoScreen(),
+  );
 }

@@ -26,6 +26,8 @@ export 'package:litzorum/models/settings.dart';
 export 'package:litzorum/main.dart';
 export 'package:litzorum/services/audio_service.dart';
 export 'package:litzorum/utils.dart';
+export 'package:google_mlkit_translation/google_mlkit_translation.dart';
+export 'package:provider/provider.dart';
 
 // 5. Pages & Navigation
 export 'package:litzorum/ending_page.dart';

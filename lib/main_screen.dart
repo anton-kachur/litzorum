@@ -1,4 +1,6 @@
-import 'shared_imports.dart';
+import 'package:litzorum/services/translation_service.dart' show TranslationExtension;
+
+import 'services/shared_imports.dart';
 
 /// The main dashboard screen showing faction icons and navigation.
 class MainScreen extends StatefulWidget {
@@ -29,7 +31,7 @@ class _MainScreenState extends State<MainScreen> {
   }
 
   /// Builds a faction button that plays a sound and navigates to [route].
-  IconButton _buildFractionButton(String asset, String route) => IconButton(
+  IconButton _buildFractionButton(String asset, String label, String route) => IconButton(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
       onPressed: () {
@@ -37,14 +39,32 @@ class _MainScreenState extends State<MainScreen> {
         AudioService().playClick(); 
         Navigator.of(context).pushNamed(route);
       }, 
-      icon: ClipRRect(
-        borderRadius: BorderRadius.circular(8.0),
-        child: Image.asset(
-          scale: 4.67,
-          asset
-        )
-        ),
-      );
+      icon: Stack(
+        alignment: Alignment.bottomCenter,
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8.0),
+            child: Image.asset(
+              scale: 4.67,
+              asset
+            )
+          ),
+
+          Positioned(
+            bottom: 27.5,
+            child: Text(
+              label.tr,
+              style: const TextStyle(
+                fontFamily: "Monda-Bold",
+                fontSize: 12,
+                color: Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+              ),
+            ),
+          )
+          
+        ]
+      )
+    );
 
   @override
   Widget build(BuildContext context) {
@@ -66,24 +86,24 @@ class _MainScreenState extends State<MainScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildFractionButton("assets/government.png", "government_page"),
-                  _buildFractionButton("assets/people.png", "people_page"),
+                  _buildFractionButton("assets/government.png", "GOVERNMENT".tr, "government_page"),
+                  _buildFractionButton("assets/people.png", "PEOPLE".tr, "people_page"),
                 ],
               ),
             
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildFractionButton("assets/industry.png", "industry_page"),
-                  _buildFractionButton("assets/science.png", "science_page"),
+                  _buildFractionButton("assets/industry.png", "INDUSTRY".tr, "industry_page"),
+                  _buildFractionButton("assets/science.png", "SCIENCE".tr, "science_page"),
                 ],
               ),
 
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _buildFractionButton("assets/army.png", "army_page"),
-                  _buildFractionButton("assets/culture.png", "culture_page"),
+                  _buildFractionButton("assets/army.png", "ARMY".tr, "army_page"),
+                  _buildFractionButton("assets/culture.png", "CULTURE".tr, "culture_page"),
                 ],
               ),
 
