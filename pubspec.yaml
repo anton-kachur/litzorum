@@ -48,9 +48,9 @@ flutter:
     - assets/sounds/
   
   fonts:
-    - family: Monda-Bold
+    - family: Roboto-Bold
       fonts:
-        - asset: assets/fonts/Monda-Bold.ttf
-    - family: Monda
+        - asset: assets/fonts/Roboto-Bold.ttf
+    - family: Roboto
       fonts:
-        - asset: assets/fonts/Monda-Regular.ttf
+        - asset: assets/fonts/Roboto-Regular.ttf

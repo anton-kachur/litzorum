@@ -76,6 +76,9 @@ class TranslationService {
       'Air Energy Plant': 'Air Energy Plant',
       'Human Genome Storage': 'Human Genome Storage',
       'Countries conquered': 'Countries conquered',
+      'Declare war': 'Declare war',
+      'Propose trade': 'Propose trade',
+      'Propose union': 'Propose union',
     },
     'es': {
       'New game': 'Nueva partida',
@@ -145,6 +148,9 @@ class TranslationService {
       'Air Energy Plant': 'Central de energía atmosférica',
       'Human Genome Storage': 'Almacenamiento del genoma humano',
       'Countries conquered': 'Países conquistados',
+      'Declare war': 'Declarar la guerra',
+      'Propose trade': 'Proponer el comercio',
+      'Propose union': 'Proponer la unión',
     },
     'de': {
       'New game': 'Neues Spiel',
@@ -214,6 +220,9 @@ class TranslationService {
       'Air Energy Plant': 'Luftenergieanlage',
       'Human Genome Storage': 'Speicherung des menschlichen Genoms',
       'Countries conquered': 'Eroberte Länder',
+      'Declare war': 'Krieg erklären',
+      'Propose trade': 'Handel vorschlagen',
+      'Propose union': 'Union vorschlagen',
     },
 
     'fr': {
@@ -284,6 +293,9 @@ class TranslationService {
       'Air Energy Plant': 'Centrale à énergie pneumatique',
       'Human Genome Storage': 'Stockage du génome humain',
       'Countries conquered': 'Pays conquis',
+      'Declare war': 'Déclarer la guerre',
+      'Propose trade': 'Proposer des accords commerciaux',
+      'Propose union': 'Proposer une union',
     },
 
     'ua': {
@@ -354,6 +366,9 @@ class TranslationService {
       'Air Energy Plant': 'Повітряна електростанція',
       'Human Genome Storage': 'Сховище геному людини',
       'Countries conquered': 'Завойовані країни',
+      'Declare war': 'Оголосити війну',
+      'Propose trade': 'Запропонувати торгівлю',
+      'Propose union': 'Запропонувати союз',
     },
 
     'it': {
@@ -424,6 +439,9 @@ class TranslationService {
       'Air Energy Plant': 'Centrale a energia pneumatica',
       'Human Genome Storage': 'Archivio del genoma umano',
       'Countries conquered': 'Paesi conquistati',
+      'Declare war': 'Dichiarare guerra',
+      'Propose trade': 'Proporre il commercio',
+      'Propose union': "Proporre l'unione",
     },
 
     'ja': {
@@ -494,6 +512,9 @@ class TranslationService {
       'Air Energy Plant': '空気エネルギー発電所',
       'Human Genome Storage': 'ヒトゲノム保存施設',
       'Countries conquered': '征服した国々',
+      'Declare war': '宣戦布告する',
+      'Propose trade': '貿易を提案する',
+      'Propose union': '連合を提案する',
     },
 
     'pl': {
@@ -564,6 +585,9 @@ class TranslationService {
       'Air Energy Plant': 'Elektrownia pneumatyczna',
       'Human Genome Storage': 'Bank ludzkiego genomu',
       'Countries conquered': 'Podbite kraje',
+      'Declare war': 'Wypowiedz wojnę',
+      'Propose trade': 'Zaproponuj handel',
+      'Propose union': 'Zaproponuj unię',
     },
 
     'pt': {
@@ -634,6 +658,9 @@ class TranslationService {
       'Air Energy Plant': 'Uina de Energia Pneumática',
       'Human Genome Storage': 'Armazenamento de Genoma Humano',
       'Countries conquered': 'Países conquistados',
+      'Declare war': 'Declarar guerra',
+      'Propose trade': 'Propor comércio',
+      'Propose union': 'Propor união',
     },
 
     'ko': {
@@ -704,6 +731,9 @@ class TranslationService {
       'Air Energy Plant': '공기 에너지 발전소',
       'Human Genome Storage': '인간 게놈 보관소',
       'Countries conquered': '정복한 국가들',
+      'Declare war': '전쟁 선포',
+      'Propose trade': '무역 제안',
+      'Propose union': '노조 결성 제안',
     },
 
     'fi': {
@@ -774,6 +804,9 @@ class TranslationService {
       'Air Energy Plant': 'Ilmaenergiayksikkö',
       'Human Genome Storage': 'Ihmisen genomin säilytys',
       'Countries conquered': 'Valloitetut maat',
+      'Declare war': 'Julista sota',
+      'Propose trade': 'Ehdota kauppaa',
+      'Propose union': 'Ehdota liittoa',
     },
 
     'zh-TW': {
@@ -844,6 +877,9 @@ class TranslationService {
       'Air Energy Plant': '空氣能發電廠',
       'Human Genome Storage': '人類基因組儲存庫',
       'Countries conquered': '征服的國家',
+      'Declare war': '宣戰',
+      'Propose trade': '提議貿易',
+      'Propose union': '提議結盟',
     },
 
   };

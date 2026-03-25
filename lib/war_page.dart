@@ -19,58 +19,69 @@ class _WarPageState extends State<WarPage> {
   final Random random = Random();
 
   // Main parameters for battle
-  Padding parameter(String asset, String headText, List<String> text, [bool isPlayer=true]) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Transform.flip(
-        flipX: isPlayer? false : true, // Set to true to flip horizontally
-        child: Wrap(
-          runAlignment: WrapAlignment.end,
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width / 2.25,
-              height: 96*(5/6),
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 159, 145, 110),
-                borderRadius: BorderRadius.all(Radius.circular(10))
-              ),
-              child: Wrap(
-                direction: Axis.horizontal,
-                children: [
-                  Image.asset(asset, height: 96*(5/6), width: 96*(5/6)),
-                
-                  const SizedBox(width: 10*(5/6)),
-                  
-                  Transform.flip(
-                    flipX: isPlayer? false : true,
-                    child: Column(
-                      crossAxisAlignment: isPlayer? CrossAxisAlignment.start : 
-                        CrossAxisAlignment.end,
-                      children: [
-                      Text(headText.tr, style: const TextStyle(
-                        fontSize: 16*(5/6), 
-                        color: Color.fromARGB(255, 63, 63, 63),
-                        fontFamily: "Monda-Bold",
-                      )),
-                      
-                      for (String i in text) 
-                        Text(i.tr, style: const TextStyle(
-                          fontSize: 16*(5/6), 
-                          color: Color.fromARGB(255, 63, 63, 63),
-                          fontFamily: "Monda",
-                        )),
-                      ]
-                    )
-                  ),
+Padding parameter(String asset, String headText, List<String> text, [bool isPlayer = true]) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(vertical: 10),
+    child: Transform.flip(
+      flipX: isPlayer ? false : true,
+      child: Container(
+        width: MediaQuery.of(context).size.width / 2.25,
+        constraints: const BoxConstraints(minHeight: 96 * (5 / 6)),
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 159, 145, 110),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
 
-                ],
-              )
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Image.asset(asset, height: 80, width: 80),
+            const SizedBox(width: 8),
+            
+            Expanded(
+              child: Transform.flip(
+                flipX: isPlayer ? false : true,
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: isPlayer ? CrossAxisAlignment.start : CrossAxisAlignment.end,
+                  children: [
+                    
+                    Text(
+                      headText.tr,
+                      textAlign: isPlayer ? TextAlign.start : TextAlign.end,
+                      softWrap: true,
+                      style: const TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                        color: Color.fromARGB(255, 63, 63, 63),
+                        fontFamily: "Roboto-Bold",
+                      ),
+                    ),
+                    
+                    const SizedBox(height: 2),
+                    
+                    for (String i in text)
+                      Text(
+                        i.tr,
+                        style: const TextStyle(
+                          fontSize: 13,
+                          color: Color.fromARGB(255, 63, 63, 63),
+                          fontFamily: "Roboto",
+                        ),
+                      ),
+
+                  ],
+                ),
+              ),
             ),
+            const SizedBox(width: 5),
           ],
-        )
-      )
-    );
-  }
+        ),
+      ),
+    ),
+  );
+}
+
 
   // Creates battle parameters for each fraction like air_defence, frontline and back
   Widget battleParametersList([bool isPlayer = true]) => Column(
@@ -261,7 +272,7 @@ class _WarPageState extends State<WarPage> {
             textAlign: TextAlign.center,
             style: const TextStyle(
               color: Color.fromARGB(255, 63, 63, 63),
-              fontFamily: "Monda-Bold",
+              fontFamily: "Roboto-Bold",
               fontSize: 18,
             ),
           ),
@@ -293,7 +304,7 @@ class _WarPageState extends State<WarPage> {
                         lose ? "Sakjemeh!" : "C̦eantu máre", // buttons' names
                         style: const TextStyle(
                           color: Color.fromARGB(255, 159, 145, 110),
-                          fontFamily: "Monda-Bold",
+                          fontFamily: "Roboto-Bold",
                           fontSize: 16,
                         ),
                       ),

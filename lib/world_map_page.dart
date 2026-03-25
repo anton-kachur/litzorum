@@ -1,3 +1,5 @@
+import 'package:litzorum/services/translation_service.dart';
+
 import 'services/shared_imports.dart';
 
 /// The global map screen providing an overview of all countries and diplomatic options.
@@ -26,12 +28,12 @@ class _WorldMapPageState extends State<WorldMapPage> {
     "Serkamenia": [191, 291, 50, 7, 184],
     "Vajläulä": [230, 145, -15, 15, 139],
     "Kamraiștanź": [135, 175, -77, 9, 184],
-    "Zrașpolj\nRiatst": [142, 260, -77, 14, 139],
+    "Zrașpolj Riatst": [142, 260, -77, 14, 139],
   };
 
   // Dialog that displays variants to deal with a country
   void showDiplomacyDialog(String countryName, BuildContext context) async {
-    final String? result = await showDialog<String>(
+    showDialog<String>(
       context: context,
       builder: (BuildContext context) {
         return SimpleDialog(
@@ -46,7 +48,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
                 countryName, 
                 style: const TextStyle(
                   color:  Color.fromARGB(255, 63, 63, 63),
-                  fontFamily: "Monda-Bold"
+                  fontFamily: "Roboto-Bold"
                 )
               ),
 
@@ -94,8 +96,8 @@ class _WorldMapPageState extends State<WorldMapPage> {
           }
         },
         child: Text(
-          text, 
-          style: const TextStyle(fontFamily: "Monda-Regular", fontSize: 16)),
+          text.tr, 
+          style: const TextStyle(fontFamily: "Roboto-Regular", fontSize: 16)),
         ),
     );
   }
@@ -198,7 +200,9 @@ class _WorldMapPageState extends State<WorldMapPage> {
                             onPressed: () {
                               // Play the sound effect immediately
                               AudioService().playClick(); 
-                              showDiplomacyDialog(country.key, context);
+                              if (country.key != "Litzórum") {
+                                showDiplomacyDialog(country.key, context);
+                              }
                             },
                             child: RotationTransition(
                               turns: AlwaysStoppedAnimation(country.value[2] / 360),
@@ -209,7 +213,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
                                   color: Color.fromARGB(
                                     country.value[4].toInt(), 63, 63, 63
                                   ),
-                                  fontFamily: "Monda-Bold"
+                                  fontFamily: "Roboto-Bold"
                                 )
                               ),
                             ),

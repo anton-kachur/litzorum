@@ -47,13 +47,13 @@ class _ScienceState extends State<Science> {
                     children: [
                     Text(headText.tr, style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                      fontFamily: "Monda-Bold",
+                      fontFamily: "Roboto-Bold",
                     )),
                     
                     for (String i in text) 
                       Text(i, style: const TextStyle(
                         fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                        fontFamily: "Monda",
+                        fontFamily: "Roboto",
                       )),
                     
                   ]),

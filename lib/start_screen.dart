@@ -65,7 +65,7 @@ class _StartScreenState extends State<StartScreen> {
             Text(
               label,
               style: const TextStyle(
-                fontFamily: "Monda-Bold",
+                fontFamily: "Roboto-Bold",
                 fontSize: 19,
                 color: Color.fromARGB(255, 205, 192, 68),
               ),
@@ -160,7 +160,7 @@ class _StartScreenState extends State<StartScreen> {
                   const Text(
                     "Litzórum",
                     style: TextStyle(
-                      fontFamily: "Monda-Bold",
+                      fontFamily: "Roboto-Bold",
                       fontSize: 25,
                     ),
                   ),

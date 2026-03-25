@@ -108,7 +108,7 @@ Wrap stat(String asset, var displayableData) => Wrap(
         "${displayableData.runtimeType == double ? double.parse(displayableData.toStringAsFixed(1)) : displayableData}", 
         style: const TextStyle(
           fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-          fontFamily: "Monda-Bold",
+          fontFamily: "Roboto-Bold",
         )),
       Image.asset(asset, height: 27, width: 34),
     ],
@@ -137,7 +137,7 @@ SizedBox backButton(BuildContext context, {String asset = ''}) => SizedBox(
         Text(
           "Back".tr,
           style: const TextStyle(
-            fontFamily: "Monda-Bold",
+            fontFamily: "Roboto-Bold",
             fontSize: 19,
             color: Color.fromARGB(255, 205, 192, 68),
           ),
@@ -151,7 +151,7 @@ SizedBox backButton(BuildContext context, {String asset = ''}) => SizedBox(
 Tooltip infoButton(String message, bool isDark) => Tooltip(
     textStyle: const TextStyle(
       color: Color.fromARGB(255, 63, 63, 63), 
-      fontFamily: "Monda-Regular",
+      fontFamily: "Roboto-Regular",
       fontSize: 14
     ),
     
@@ -198,7 +198,7 @@ AppBar statsAppBar(BuildContext context) => AppBar(
                   text: currentGame.playerName.split(" ").join("\n"), 
                   style: const TextStyle(
                     fontSize: 18, color: Color.fromARGB(255, 63, 63, 63),
-                    fontFamily: "Monda-Bold",
+                    fontFamily: "Roboto-Bold",
                   ),
 
                   children: <TextSpan>[
@@ -206,7 +206,7 @@ AppBar statsAppBar(BuildContext context) => AppBar(
                       text: "\n${'years'.tr}: ${double.parse(currentGame.reigningYears.toStringAsFixed(1))}", 
                       style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                      fontFamily: "Monda",
+                      fontFamily: "Roboto",
                     )),
 
                   ],
@@ -274,8 +274,9 @@ BottomAppBar bottomBar(BuildContext context) {
               Text(
                 "Menu".tr,
                 style: TextStyle(
-                  fontFamily: "Monda-Bold",
-                  fontSize: settingsBox.values.first.settings["language"] == "de" ? 12 : 16,
+                  fontFamily: "Roboto-Bold",
+                  fontSize: settingsBox.values.first.settings["language"] == "de" ||
+                    settingsBox.values.first.settings["language"] == "fr"? 12 : 16,
                   color: const Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
                 ),
               ),
@@ -306,8 +307,9 @@ BottomAppBar bottomBar(BuildContext context) {
               Text(
                 "Save".tr,
                 style: TextStyle(
-                  fontFamily: "Monda-Bold",
-                  fontSize: settingsBox.values.first.settings["language"] == "de" ? 12 : 16,
+                  fontFamily: "Roboto-Bold",
+                  fontSize: settingsBox.values.first.settings["language"] == "de" || 
+                    settingsBox.values.first.settings["language"] == "fr"? 12 : 16,
                   color: const Color.fromARGB(255, 205, 192, 68),
                 ),
               ),

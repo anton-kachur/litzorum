@@ -33,12 +33,12 @@ class _GameStatsPageState extends State<GameStatsPage> {
               children: [
                 const Text("Game statistics", style: TextStyle(
                   fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                  fontFamily: "Monda-Bold",
+                  fontFamily: "Roboto-Bold",
                 )),
                 
                 Text(currentGame.toString(), style: const TextStyle(
                   fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                  fontFamily: "Monda",
+                  fontFamily: "Roboto",
                 ))
               ],
             )

@@ -92,7 +92,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
             Text(
               "Delete saved game".tr,
               style: const TextStyle(
-                fontFamily: "Monda-Bold",
+                fontFamily: "Roboto-Bold",
                 fontSize: 19,
                 color: Color.fromARGB(255, 205, 192, 68),
               ),
@@ -313,7 +313,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
       ), 
       Text(
         (date != null) ? "Id: $gameId\n$date" : "Empty slot".tr, 
-        style: const TextStyle(fontFamily: "Monda-Regular", fontSize: 10),
+        style: const TextStyle(fontFamily: "Roboto-Regular", fontSize: 10),
         textAlign: TextAlign.center,
       )
     ], 
@@ -377,7 +377,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
                             Text(
                               "Back to menu".tr,
                               style: const TextStyle(
-                                fontFamily: "Monda-Bold",
+                                fontFamily: "Roboto-Bold",
                                 fontSize: 16,
                                 color: Color.fromARGB(255, 205, 192, 68),
                               ),

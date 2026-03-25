@@ -115,13 +115,13 @@ class _ParamsPageState extends State<ParamsPage> {
                       children: [
                       Text(headText, style: const TextStyle(
                         fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                        fontFamily: "Monda-Bold",
+                        fontFamily: "Roboto-Bold",
                       )),
                       
                       for (String i in text) 
                         Text(i, style: const TextStyle(
                           fontSize: 14, color: Color.fromARGB(255, 63, 63, 63),
-                          fontFamily: "Monda",
+                          fontFamily: "Roboto",
                         )),
                       
                     ]),
@@ -199,13 +199,13 @@ class _ParamsPageState extends State<ParamsPage> {
                     children: [
                     Text(headText.tr, style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                      fontFamily: "Monda-Bold",
+                      fontFamily: "Roboto-Bold",
                     )),
                     
                     for (String i in text) 
                       Text(i, style: const TextStyle(
                         fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                        fontFamily: "Monda",
+                        fontFamily: "Roboto",
                       )),
                     
                   ]),
@@ -320,13 +320,13 @@ class _ParamsPageState extends State<ParamsPage> {
                     children: [
                     Text(headText.tr, style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                      fontFamily: "Monda-Bold",
+                      fontFamily: "Roboto-Bold",
                     )),
                     
                     for (String i in text) 
                       Text(i, style: const TextStyle(
                         fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                        fontFamily: "Monda",
+                        fontFamily: "Roboto",
                       )),
                     
                   ]),
@@ -430,7 +430,7 @@ class _ParamsPageState extends State<ParamsPage> {
                       softWrap: true,
                       style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                      fontFamily: "Monda-Bold",
+                      fontFamily: "Roboto-Bold",
                       
                     )),
                     
@@ -438,7 +438,7 @@ class _ParamsPageState extends State<ParamsPage> {
                       "${text[0]}${text[1].substring(0, text[1].length - 6)}M", 
                       style: const TextStyle(
                       fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                      fontFamily: "Monda",
+                      fontFamily: "Roboto",
                     )),
                     
                   ])),

@@ -98,7 +98,7 @@ class _SettingsPageState extends State<SettingsPage> {
                       Text(title, style: const TextStyle(
                         fontSize: 16, 
                         color: Color.fromARGB(255, 63, 63, 63),
-                        fontFamily: "Monda-Bold",
+                        fontFamily: "Roboto-Bold",
                       )),
 
                       Container(
@@ -172,7 +172,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     children: [
                       Text(title, style: const TextStyle(
                         fontSize: 16, color: Color.fromARGB(255, 63, 63, 63),
-                        fontFamily: "Monda-Bold",
+                        fontFamily: "Roboto-Bold",
                       )),
 
                       Container(
@@ -263,7 +263,7 @@ class _SettingsPageState extends State<SettingsPage> {
                         style: const TextStyle(
                           fontSize: 16,
                           color: Color.fromARGB(255, 63, 63, 63),
-                          fontFamily: "Monda-Bold",
+                          fontFamily: "Roboto-Bold",
                         )),
 
                       for (String i in textList)
@@ -271,7 +271,7 @@ class _SettingsPageState extends State<SettingsPage> {
                           style: const TextStyle(
                             fontSize: 16,
                             color: Color.fromARGB(255, 63, 63, 63),
-                            fontFamily: "Monda",
+                            fontFamily: "Roboto",
                           )),
                     ]
                   ),
@@ -331,13 +331,13 @@ class _SettingsPageState extends State<SettingsPage> {
                           style: const TextStyle(
                             fontSize: 16,
                             color: Color.fromARGB(255, 63, 63, 63),
-                            fontFamily: "Monda-Bold",
+                            fontFamily: "Roboto-Bold",
                           )),
                       Text(langDisplay,
                           style: const TextStyle(
                             fontSize: 14,
                             color: Color.fromARGB(255, 63, 63, 63),
-                            fontFamily: "Monda",
+                            fontFamily: "Roboto",
                           )),
                     ],
                   ),
@@ -391,7 +391,7 @@ class _SettingsPageState extends State<SettingsPage> {
         label,
         style: const TextStyle(
           color: Color.fromARGB(255, 63, 63, 63),
-          fontFamily: "Monda-Bold",
+          fontFamily: "Roboto-Bold",
         ),
       ),
     );
@@ -404,7 +404,7 @@ class _SettingsPageState extends State<SettingsPage> {
       builder: (context) => AlertDialog(
         backgroundColor: const Color.fromARGB(255, 159, 145, 110),
         title: const Text("Enter your name",
-            style: TextStyle(fontFamily: "Monda-Bold", fontSize: 16)),
+            style: TextStyle(fontFamily: "Roboto-Bold", fontSize: 16)),
         content: TextFormField(
           initialValue: settings["player_name"],
           onChanged: (value) => settings["player_name"] = value,
@@ -416,7 +416,7 @@ class _SettingsPageState extends State<SettingsPage> {
         ),
         actions: [
           TextButton(
-            child: const Text("Cancel", style: TextStyle(color: Color.fromARGB(255, 63, 63, 63), fontFamily: "Monda-Regular", fontSize: 16)),
+            child: const Text("Cancel", style: TextStyle(color: Color.fromARGB(255, 63, 63, 63), fontFamily: "Roboto-Regular", fontSize: 16)),
             onPressed: () {
               // Play the sound effect immediately
               AudioService().playClick(); 

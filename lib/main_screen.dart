@@ -55,7 +55,7 @@ class _MainScreenState extends State<MainScreen> {
             child: Text(
               label.tr,
               style: const TextStyle(
-                fontFamily: "Monda-Bold",
+                fontFamily: "Roboto-Bold",
                 fontSize: 12,
                 color: Color.fromARGB(255, 205, 192, 68),
               ),
