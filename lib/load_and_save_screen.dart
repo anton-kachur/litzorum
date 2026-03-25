@@ -362,7 +362,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
                     Center(
                       child: IconButton(
                         padding: EdgeInsets.only(
-                          top: MediaQuery.of(context).size.height / 30
+                          top: 10
                         ),
                         splashColor: Colors.transparent,
                         highlightColor: Colors.transparent, 

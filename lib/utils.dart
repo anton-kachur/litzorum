@@ -259,6 +259,7 @@ BottomAppBar bottomBar(BuildContext context) {
       spacing: 7,
       children: [
         
+        // Back to menu button
         IconButton(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent, 
@@ -290,6 +291,7 @@ BottomAppBar bottomBar(BuildContext context) {
           }
         ),
         
+        // Save game button
         IconButton(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent,
@@ -306,7 +308,7 @@ BottomAppBar bottomBar(BuildContext context) {
                 style: TextStyle(
                   fontFamily: "Monda-Bold",
                   fontSize: settingsBox.values.first.settings["language"] == "de" ? 12 : 16,
-                  color: const Color.fromARGB(255, 205, 192, 68), // Adjust color to match your button design
+                  color: const Color.fromARGB(255, 205, 192, 68),
                 ),
               ),
             ]
@@ -319,6 +321,7 @@ BottomAppBar bottomBar(BuildContext context) {
           }
         ),
 
+        // Next turn button
         IconButton(
           splashColor: Colors.transparent,
           highlightColor: Colors.transparent, 
@@ -331,24 +334,33 @@ BottomAppBar bottomBar(BuildContext context) {
             AudioService().playClick(); 
             currentGame.reigningYears += 0.1;
 
-            //=====================================================================================================
-            // Full-time reigning ending ==========================================================================
-            //=====================================================================================================
+            //==================================================================
+            // Full-time reigning ending =======================================
+            //==================================================================
             if (double.parse(currentGame.reigningYears.toStringAsFixed(1)) == 80.0) {
               ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                 content: Text("GG WP!!!"),
                 duration: Duration(seconds: 5),
               ));
-              Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) => const GameStatsPage()));
+              Navigator.push(
+                context, 
+                MaterialPageRoute(
+                  builder: (BuildContext context) => const GameStatsPage()
+                )
+              );
             } else {
                 currentGame.goods += currentGame.heavyIndustryGoodsOutput + 
                   currentGame.lightIndustryGoodsOutput + 
                   currentGame.agricultureFarmsGoodsOutput;
 
 
-              double el = (((currentGame.schoolsNumber + (currentGame.schoolsNumber * getIdeologyBonus("Science"))) * 700) + 
-                  ((currentGame.universitiesNumber + (currentGame.universitiesNumber * getIdeologyBonus("Science"))) * 1200) + 
-                  ((currentGame.researchCentersNumber + (currentGame.researchCentersNumber * getIdeologyBonus("Science"))) * 1700)
+              double el = (
+                  ((currentGame.schoolsNumber + 
+                  (currentGame.schoolsNumber * getIdeologyBonus("Science"))) * 700) + 
+                  ((currentGame.universitiesNumber + 
+                  (currentGame.universitiesNumber * getIdeologyBonus("Science"))) * 1200) + 
+                  ((currentGame.researchCentersNumber + 
+                  (currentGame.researchCentersNumber * getIdeologyBonus("Science"))) * 1700)
                   ) / currentGame.population;
 
               currentGame.educationLevel = el > 1.0 ? 1.0 : el;
@@ -358,19 +370,23 @@ BottomAppBar bottomBar(BuildContext context) {
               currentGame.purchasingPower = pp > 1.0 ? 1.0 : el;
 
 
-              currentGame.cultureLevel = (currentGame.highCultureLevel + currentGame.massCultureLevel) / 2; 
+              currentGame.cultureLevel = (
+                currentGame.highCultureLevel + currentGame.massCultureLevel) / 2; 
 
-              currentGame.lifeQuality = (currentGame.purchasingPower + currentGame.educationLevel + currentGame.cultureLevel) / 3;
-              currentGame.leadersPopularity = (currentGame.lifeQuality) /*+ getBigProjectsBonuses(currentGame.bigProjects)*/ * 100;
+              currentGame.lifeQuality = (
+                currentGame.purchasingPower + currentGame.educationLevel + currentGame.cultureLevel) / 3;
+              currentGame.leadersPopularity = (
+                currentGame.lifeQuality) /*+ getBigProjectsBonuses(currentGame.bigProjects)*/ * 100;
 
               if (currentGame.educationLevel <= 0.5 || currentGame.purchasingPower <=0.5) {
                 impatienceLevel++;
-                currentGame.population = currentGame.population - (currentGame.population * currentGame.lifeQuality * 0.3).round();
+                currentGame.population = currentGame.population - (
+                  currentGame.population * currentGame.lifeQuality * 0.3).round();
               } else {
                 impatienceLevel--;
-                currentGame.population = currentGame.population + (currentGame.population * currentGame.lifeQuality * 0.3).round();
+                currentGame.population = currentGame.population + (
+                  currentGame.population * currentGame.lifeQuality * 0.3).round();
               }
-
 
             //=====================================================================================================
             // Revolution ending ==================================================================================
@@ -403,9 +419,6 @@ BottomAppBar bottomBar(BuildContext context) {
             }
           }
         ),
-        
-        
-
       ],
     ),
   );
@@ -423,7 +436,7 @@ int getNumberOfConquiredCountries() {
   return counter;
 }
 
-// Changing stats of player. Currently not in use
+// Changing stats of player
 Future changeGameStats(String stat, String newValue) async {
   Box<GameStats> gameStatsBox = await Hive.openBox("game_stats");
   if (gameStatsBox.getAt(0)!.stats.keys.contains(stat)) {
