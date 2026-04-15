@@ -96,7 +96,7 @@ class _EndingPageState extends State<EndingPage> {
               highlightColor: Colors.transparent, 
               icon: Image.asset(
                 scale: 2,
-                "assets/back_to_menu_button.png"
+                "assets/buttons/back_to_menu_button.png"
               ), 
               onPressed: () {
                 // Play the sound effect immediately

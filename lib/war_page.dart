@@ -82,24 +82,23 @@ Padding parameter(String asset, String headText, List<String> text, [bool isPlay
   );
 }
 
-
   // Creates battle parameters for each fraction like air_defence, frontline and back
   Widget battleParametersList([bool isPlayer = true]) => Column(
     children: [
       parameter(
-        isPlayer? "assets/air_defence.png" : "assets/air_defence_enemy.png", "Air defence", 
+        isPlayer? "assets/buttons/air_defence.png" : "assets/buttons/air_defence_enemy.png", "Air defence", 
         [isPlayer? getShortNumberForm(currentArmySettings['Litzórum']!.airDefenceAmount) :
           getShortNumberForm(currentArmySettings[widget.countryName]!.airDefenceAmount)],
         isPlayer
       ),
       parameter(
-        isPlayer? "assets/frontline.png" : "assets/frontline_enemy.png", "Frontline", 
+        isPlayer? "assets/buttons/frontline.png" : "assets/buttons/frontline_enemy.png", "Frontline", 
         [isPlayer? getShortNumberForm(currentArmySettings['Litzórum']!.frontlineAmount) :
           getShortNumberForm(currentArmySettings[widget.countryName]!.frontlineAmount)],
         isPlayer
       ),
       parameter(
-        isPlayer? "assets/home_front.png" : "assets/home_front_enemy.png", "Back", 
+        isPlayer? "assets/buttons/home_front.png" : "assets/buttons/home_front_enemy.png", "Back", 
         [isPlayer? getShortNumberForm(currentArmySettings['Litzórum']!.backAmount) :
           getShortNumberForm(currentArmySettings[widget.countryName]!.backAmount)],
         isPlayer
@@ -230,7 +229,7 @@ Padding parameter(String asset, String headText, List<String> text, [bool isPlay
     
       icon: ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
-        child: Image.asset("assets/attack_button.png") 
+        child: Image.asset("assets/buttons/attack_button.png") 
         ),
       )
   );
@@ -248,7 +247,7 @@ Padding parameter(String asset, String headText, List<String> text, [bool isPlay
       }, 
       icon: ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
-        child: Image.asset("assets/retreat_button.png") 
+        child: Image.asset("assets/buttons/retreat_button.png") 
         ),
       )
   );
@@ -331,7 +330,7 @@ Padding parameter(String asset, String headText, List<String> text, [bool isPlay
         width: double.infinity,
         decoration: const BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/background.png"),
+            image: AssetImage("assets/other/background.png"),
             fit: BoxFit.fill,
           ),
         ), 

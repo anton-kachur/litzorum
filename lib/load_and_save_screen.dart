@@ -86,7 +86,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
           alignment: Alignment.center,
           children: [
             Image.asset(
-                "assets/blank.png",
+                "assets/buttons/blank.png",
             ),
 
             Text(
@@ -304,7 +304,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
                   });
                 }, 
                 child: Image.asset(
-                  "assets/cancel_icon.png", 
+                  "assets/buttons/cancel_icon.png", 
                   height: 30, width: 30
                 ),
               ),
@@ -333,7 +333,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
               width: double.infinity,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage("assets/background.png"),
+                  image: AssetImage("assets/other/background.png"),
                   fit: BoxFit.fill,
                 ),
               ), 
@@ -348,13 +348,13 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
                     if (snapshot.hasData)
                       for (Game game in snapshot.data[0]) 
                         savingSlotButton(
-                          "assets/save.png", game.gameId, game.gameStartDate
+                          "assets/buttons/save.png", game.gameId, game.gameStartDate
                         ),
                         
                     for (int i = 0; i < totalSlots - (
                         snapshot.hasData ? snapshot.data[0].length : 0); i++
                       )
-                      savingSlotButton("assets/empty_slot.png"),
+                      savingSlotButton("assets/buttons/empty_slot.png"),
                     
                     if (snapshot.hasData && snapshot.data[0].isNotEmpty) 
                       deleteSavedGameButton(context),
@@ -371,7 +371,7 @@ class _LoadSaveScreenState extends State<LoadSaveScreen> {
                           children: [
                             Image.asset(
                               scale: 2,
-                              "assets/blank.png"
+                              "assets/buttons/blank.png"
                             ), 
 
                             Text(

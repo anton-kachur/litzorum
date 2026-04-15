@@ -79,7 +79,7 @@ class _StartScreenState extends State<StartScreen> {
   /// Builds the 'New Game' button.
   Widget _newGameButton(BuildContext context) => _menuButton(
     label: "New game".tr,
-    assetPath: "assets/blank.png",
+    assetPath: "assets/buttons/blank.png",
     onPressed: () {
       navigatorKey.currentState?.push(
         MaterialPageRoute(builder: (_) => const LoadSaveScreen()),
@@ -90,7 +90,7 @@ class _StartScreenState extends State<StartScreen> {
   /// Builds the 'Continue' button.
   Widget _continueButton(BuildContext context) => _menuButton(
     label: "Continue".tr,
-    assetPath: "assets/blank.png",
+    assetPath: "assets/buttons/blank.png",
     onPressed: () {
       Navigator.push(
         context,
@@ -102,7 +102,7 @@ class _StartScreenState extends State<StartScreen> {
   /// Builds the 'Settings' button.
   Widget _settingsButton(BuildContext context) => _menuButton(
     label: "Settings".tr,
-    assetPath: "assets/blank.png",
+    assetPath: "assets/buttons/blank.png",
     onPressed: () {
       Navigator.push(
         context,
@@ -114,7 +114,7 @@ class _StartScreenState extends State<StartScreen> {
   /// Builds the 'About' button.
   Widget _aboutButton(BuildContext context) => _menuButton(
     label: "About".tr,
-    assetPath: "assets/blank.png",
+    assetPath: "assets/buttons/blank.png",
     onPressed: () {
     },
   );
@@ -122,7 +122,7 @@ class _StartScreenState extends State<StartScreen> {
   /// Builds the 'Quit' button.
   Widget _quitButton(BuildContext context) => _menuButton(
     label: "Quit".tr,
-    assetPath: "assets/blank.png",
+    assetPath: "assets/buttons/blank.png",
     onPressed: () {
       gameBox.close();
       ideologiesBox.close();
@@ -144,14 +144,14 @@ class _StartScreenState extends State<StartScreen> {
           body: DecoratedBox(
             decoration: const BoxDecoration(
               image: DecorationImage(
-                image: AssetImage("assets/background.png"), fit: BoxFit.cover),
+                image: AssetImage("assets/other/background.png"), fit: BoxFit.cover),
             ),
             child: Center(
               child: Column(
                 children: [
                   // Game logo
                   Image.asset(
-                    "assets/Litzorum.png",
+                    "assets/buttons/Litzorum.png",
                     width: MediaQuery.of(context).size.width / 4,
                     height: MediaQuery.of(context).size.height / 4,
                   ),

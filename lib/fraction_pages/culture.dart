@@ -164,7 +164,7 @@ class _CultureState extends State<Culture> {
                       }
 
                     }, 
-                    icon: Image.asset("assets/fund_icon.png", height: 22)
+                    icon: Image.asset("assets/buttons/fund_icon.png", height: 22)
                   ),
               ]
             ),
@@ -185,7 +185,7 @@ class _CultureState extends State<Culture> {
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/background.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/other/background.png"), fit: BoxFit.cover),
         ),
         child: Padding(
           padding: const EdgeInsets.all(15),
@@ -193,13 +193,13 @@ class _CultureState extends State<Culture> {
             children: [
 
               parameter(
-                "assets/overall_culture.png", "Overall culture", 
+                "assets/buttons/overall_culture.png", "Overall culture", 
                 ["${'Level'.tr}: ${
                   double.parse(currentGame.cultureLevel.toStringAsFixed(2))
                 }"]
               ),
               parameter(
-                "assets/high_culture.png", "High culture", 
+                "assets/buttons/high_culture.png", "High culture", 
                 ["${'Level'.tr}: ${
                   double.parse(currentGame.highCultureLevel.toStringAsFixed(1))
                   }",
@@ -209,7 +209,7 @@ class _CultureState extends State<Culture> {
                   }"]
               ),
               parameter(
-                "assets/mass_culture.png", "Mass culture", 
+                "assets/buttons/mass_culture.png", "Mass culture", 
                 ["${'Level'.tr}: ${
                   double.parse(currentGame.massCultureLevel.toStringAsFixed(1))
                   }",

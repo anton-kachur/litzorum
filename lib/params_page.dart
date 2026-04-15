@@ -150,8 +150,8 @@ class _ParamsPageState extends State<ParamsPage> {
                       
                     },
                     icon: Image.asset(
-                      isChosen == true ? "assets/accept_icon.png" : 
-                        "assets/cancel_icon.png", 
+                      isChosen == true ? "assets/buttons/accept_icon.png" : 
+                        "assets/buttons/cancel_icon.png", 
                       height: 22
                     )
                   ),
@@ -253,7 +253,7 @@ class _ParamsPageState extends State<ParamsPage> {
                       currentGame.educationLevel = el > 1.0 ? 1.0 : el;
                     });
                   }, 
-                  icon: Image.asset("assets/build_icon.png", height: 22)
+                  icon: Image.asset("assets/buttons/build_icon.png", height: 22)
                 ),
 
                 IconButton(
@@ -278,7 +278,7 @@ class _ParamsPageState extends State<ParamsPage> {
                       currentGame.educationLevel = el > 1.0 ? 1.0 : el;
                     });
                   }, 
-                  icon: Image.asset("assets/destroy_icon.png", height: 22)
+                  icon: Image.asset("assets/buttons/destroy_icon.png", height: 22)
                 ),
               ]
             ),
@@ -361,7 +361,7 @@ class _ParamsPageState extends State<ParamsPage> {
                       ));
                     }
                   }, 
-                  icon: Image.asset("assets/build_icon.png", height: 22)
+                  icon: Image.asset("assets/buttons/build_icon.png", height: 22)
                 ),
 
                 IconButton(
@@ -381,7 +381,7 @@ class _ParamsPageState extends State<ParamsPage> {
                       currentGame.educationLevel = el > 1.0 ? 1.0 : el;
                     });
                   }, 
-                  icon: Image.asset("assets/destroy_icon.png", height: 22)
+                  icon: Image.asset("assets/buttons/destroy_icon.png", height: 22)
                 ),
               ]
             ),
@@ -481,8 +481,8 @@ class _ParamsPageState extends State<ParamsPage> {
                       }
                     }, 
                     icon: currentGame.bigProjects.contains(headText) ? 
-                      Image.asset("assets/info_icon.png", height: 22) : 
-                      Image.asset("assets/build_icon.png", height: 22)
+                      Image.asset("assets/buttons/info_icon.png", height: 22) : 
+                      Image.asset("assets/buttons/build_icon.png", height: 22)
                   ),
               ]
             ),
@@ -505,7 +505,7 @@ class _ParamsPageState extends State<ParamsPage> {
           width: double.infinity,
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage("assets/background.png"),
+              image: AssetImage("assets/other/background.png"),
               fit: BoxFit.fill,
             ),
           ), 
@@ -525,26 +525,26 @@ class _ParamsPageState extends State<ParamsPage> {
                       
                       if (widget.mode == "education") 
                         educationParameter(
-                          "assets/school.png", "Schools", 
+                          "assets/buttons/school.png", "Schools", 
                           ["${'Amount'.tr}: ${currentGame.schoolsNumber}"]
                         ),
 
                       if (widget.mode == "education") 
                         educationParameter(
-                          "assets/university.png", "Universities", 
+                          "assets/buttons/university.png", "Universities", 
                           ["${'Amount'.tr}: ${currentGame.universitiesNumber}"]
                         ),
 
                       if (widget.mode == "research") 
                         researchParameter(
-                          "assets/research_center.png", "Research centers", 
+                          "assets/buttons/research_center.png", "Research centers", 
                           ["${'Amount'.tr}: ${currentGame.researchCentersNumber}"]
                         ),
 
                       if (widget.mode == "big_projects") 
                         for(var i in bigProjectsCosts.entries)
                           bigProjectsParameter(
-                            "assets/big_project_${bigProjectsCosts.keys.toList().indexOf(i.key)+1}.png", 
+                            "assets/buttons/big_project_${bigProjectsCosts.keys.toList().indexOf(i.key)+1}.png", 
                             i.key, 
                             ["${'Cost'.tr}: ", "${i.value}"]
                           ),

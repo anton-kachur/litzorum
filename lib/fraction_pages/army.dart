@@ -183,11 +183,11 @@ class _ArmyState extends State<Army> {
                     }
                   }, 
                   icon: headText == "World map" ? 
-                    Image.asset("assets/expand_icon.png", height: 22) :
+                    Image.asset("assets/buttons/expand_icon.png", height: 22) :
                       (headText == "Attack" || headText == "Defence" 
                       || headText == "HQ") ?
-                      Image.asset("assets/fund_icon.png", height: 22) : 
-                      Image.asset("assets/accept_icon.png", height: 22)
+                      Image.asset("assets/buttons/fund_icon.png", height: 22) : 
+                      Image.asset("assets/buttons/accept_icon.png", height: 22)
                 ),
               ]
             ),
@@ -269,7 +269,7 @@ class _ArmyState extends State<Army> {
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/background.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/other/background.png"), fit: BoxFit.cover),
         ),
         child: SingleChildScrollView(
           child: Padding(
@@ -277,12 +277,12 @@ class _ArmyState extends State<Army> {
             child: Column(
               children: [
                 parameter(
-                  "assets/world_map.png", "World map", 
+                  "assets/buttons/world_map.png", "World map", 
                   ["${'Countries conquered'.tr}: ${getNumberOfConquiredCountries()}",
                   "${((getNumberOfConquiredCountries()*100)/currentArmySettings.length).round()}%"]
                 ),
                 parameter(
-                  "assets/hq.png", "HQ", 
+                  "assets/buttons/hq.png", "HQ", 
                   ["${'Level'.tr}: ${
                     currentGame.HQLevel < 10? 
                       "${double.parse(currentGame.HQLevel.toStringAsFixed(2))}" :
@@ -296,7 +296,7 @@ class _ArmyState extends State<Army> {
                   ]
                 ),
                 parameter(
-                  "assets/attack.png", "Attack", 
+                  "assets/buttons/attack.png", "Attack", 
                   ["${'Level'.tr}: ${
                     currentGame.attackLevel < 10?
                       "${double.parse(currentGame.attackLevel.toStringAsFixed(2))}" :
@@ -310,7 +310,7 @@ class _ArmyState extends State<Army> {
                   ]
                 ),
                 parameter(
-                  "assets/defence.png", "Defence", 
+                  "assets/buttons/defence.png", "Defence", 
                   ["${'Level'.tr}: ${
                     currentGame.defenceLevel < 10? 
                       "${double.parse(currentGame.defenceLevel.toStringAsFixed(2))}" :
@@ -324,7 +324,7 @@ class _ArmyState extends State<Army> {
                   ]
                 ),
                 parameter(
-                  "assets/air_defence.png", "Air defence", 
+                  "assets/buttons/air_defence.png", "Air defence", 
                   ["${'Active personnel'.tr}: ${
                     getShortNumberForm(
                       currentArmySettings['Litzórum']!.airDefenceAmount.round()
@@ -332,7 +332,7 @@ class _ArmyState extends State<Army> {
                   }"]
                 ),
                 parameter(
-                  "assets/frontline.png", "Frontline", 
+                  "assets/buttons/frontline.png", "Frontline", 
                   ["${'Active personnel'.tr}: ${
                     getShortNumberForm(
                       currentArmySettings['Litzórum']!.frontlineAmount.round()
@@ -340,7 +340,7 @@ class _ArmyState extends State<Army> {
                   }"]
                 ),
                 parameter(
-                  "assets/home_front.png", "Back", 
+                  "assets/buttons/home_front.png", "Back", 
                   ["${'Active personnel'.tr}: ${
                     getShortNumberForm(
                       currentArmySettings['Litzórum']!.backAmount.round()

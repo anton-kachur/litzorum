@@ -287,7 +287,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     AudioService().playClick(); 
                     _showNameEditDialog();
                   },
-                  icon: Image.asset("assets/edit_icon.png", height: 22),
+                  icon: Image.asset("assets/buttons/edit_icon.png", height: 22),
                 ),
               ]
             ),
@@ -350,7 +350,7 @@ class _SettingsPageState extends State<SettingsPage> {
               children: [
                 PopupMenuButton<String>(
                   color: const Color.fromARGB(255, 159, 145, 110),
-                  icon: Image.asset("assets/edit_icon.png", height: 22),
+                  icon: Image.asset("assets/buttons/edit_icon.png", height: 22),
                   offset: const Offset(0, 40), 
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                   onSelected: (String code) {
@@ -448,17 +448,17 @@ class _SettingsPageState extends State<SettingsPage> {
     return Scaffold(
       body: DecoratedBox(
         decoration: const BoxDecoration(
-          image: DecorationImage(image: AssetImage("assets/background.png"), fit: BoxFit.cover),
+          image: DecorationImage(image: AssetImage("assets/other/background.png"), fit: BoxFit.cover),
         ),
         child: Padding(
           padding: const EdgeInsets.fromLTRB(15, 40, 15, 15),
           child: Column(
             children: [
-              _textParameter("assets/player_name.png", "Player's name".tr,
+              _textParameter("assets/buttons/player_name.png", "Player's name".tr,
                       [settings["player_name"] ?? "Noname"]),
-              _buildVolumeParameter("assets/music.png", "Music".tr),
-              _buildSfxVolumeParameter("assets/sound.png", "Sounds".tr),
-              _buildLanguageParameter("assets/languages.png", "Language".tr),
+              _buildVolumeParameter("assets/buttons/music.png", "Music".tr),
+              _buildSfxVolumeParameter("assets/buttons/sound.png", "Sounds".tr),
+              _buildLanguageParameter("assets/buttons/languages.png", "Language".tr),
               const SizedBox(height: 20),
               backButton(context),
             ],

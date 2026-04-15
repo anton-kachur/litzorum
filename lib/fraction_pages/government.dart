@@ -135,7 +135,7 @@ class _GovernmentState extends State<Government> {
                           }";
                       });
                     }, 
-                    icon: Image.asset("assets/add_icon.png", height: 22)
+                    icon: Image.asset("assets/buttons/add_icon.png", height: 22)
                   ),
 
                 if (headText == "Exchange")
@@ -154,7 +154,7 @@ class _GovernmentState extends State<Government> {
                         });
                       }
                     }, 
-                    icon: Image.asset("assets/minus_icon.png", height: 22)
+                    icon: Image.asset("assets/buttons/minus_icon.png", height: 22)
                   ),
 
                 if (headText == "Exchange")
@@ -191,7 +191,7 @@ class _GovernmentState extends State<Government> {
                         });
                       }
                     }, 
-                    icon: Image.asset("assets/exchange_icon.png", height: 22)
+                    icon: Image.asset("assets/buttons/exchange_icon.png", height: 22)
                   ),
 
                 if (headText == "Ideology")
@@ -202,7 +202,7 @@ class _GovernmentState extends State<Government> {
                       Navigator.push(context, MaterialPageRoute(
                         builder: (BuildContext context) => const ParamsPage("ideologies")));
                     }, 
-                    icon: Image.asset("assets/expand_icon.png", height: 22)
+                    icon: Image.asset("assets/buttons/expand_icon.png", height: 22)
                   ),
 
                 if (headText == "Bank of Litzórum")
@@ -224,7 +224,7 @@ class _GovernmentState extends State<Government> {
                       }
                       
                     }, 
-                    icon: Image.asset("assets/fund_icon.png", height: 22)
+                    icon: Image.asset("assets/buttons/fund_icon.png", height: 22)
                   ),
 
                  if (headText == "Army")
@@ -253,7 +253,7 @@ class _GovernmentState extends State<Government> {
                       }
                       
                     }, 
-                    icon: Image.asset("assets/fund_icon.png", height: 22)
+                    icon: Image.asset("assets/buttons/fund_icon.png", height: 22)
                   ), 
               ]
             ),
@@ -307,7 +307,7 @@ class _GovernmentState extends State<Government> {
             body: DecoratedBox(
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                    image: AssetImage("assets/background.png"), 
+                    image: AssetImage("assets/other/background.png"), 
                     fit: BoxFit.cover
                   ),
               ),
@@ -321,30 +321,30 @@ class _GovernmentState extends State<Government> {
                         "Ideology", currentIdeology.bonuses.keys.toList()
                       ),
                       parameter(
-                        "assets/rate.png", "Leader's popularity", 
+                        "assets/buttons/rate.png", "Leader's popularity", 
                         ["${
                           double.parse(currentGame.leadersPopularity.toStringAsFixed(1))
                         }%"]
                       ),
                       parameter(
-                        "assets/population.png", "Population", 
+                        "assets/buttons/population.png", "Population", 
                         [(getShortNumberForm(currentGame.population))]
                       ),
                       parameter(
-                        "assets/army_number.png", "Army", 
+                        "assets/buttons/army_number.png", "Army", 
                         [getShortNumberForm(
                           currentArmySettings['Litzórum']!.armyAmount.round()
                         )]
                       ),
                       parameter(
-                        "assets/money.png", "Bank of Litzórum", 
+                        "assets/buttons/money.png", "Bank of Litzórum", 
                         ["${"Budget".tr}: ${formatLongNumber(
                           currentGame.budget, isDouble: true
                         )}", 
                         "${"Exchange rate".tr}: ${currentGame.exchangeRate}"]
                       ),
                       parameter(
-                        "assets/exchange.png", "Exchange", 
+                        "assets/buttons/exchange.png", "Exchange", 
                         ["${"Goods for exchange".tr}:", "${
                           currentgameStats.stats["exchange_amount"]
                         }"], 

@@ -84,15 +84,15 @@ class _PeopleState extends State<People> {
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/background.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/other/background.png"), fit: BoxFit.cover),
         ),
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Column(
             children: [
-              parameter("assets/education.png", "Education level", ["${double.parse(currentGame.educationLevel.toStringAsFixed(3))}%"]),
-              parameter("assets/purchasing_power.png", "Purchasing power", ["${double.parse(currentGame.purchasingPower.toStringAsFixed(3))}%"]),
-              parameter("assets/life_quality.png", "Life quality", ["${double.parse(currentGame.lifeQuality.toStringAsFixed(3))}%"]),
+              parameter("assets/buttons/education.png", "Education level", ["${double.parse(currentGame.educationLevel.toStringAsFixed(3))}%"]),
+              parameter("assets/buttons/purchasing_power.png", "Purchasing power", ["${double.parse(currentGame.purchasingPower.toStringAsFixed(3))}%"]),
+              parameter("assets/buttons/life_quality.png", "Life quality", ["${double.parse(currentGame.lifeQuality.toStringAsFixed(3))}%"]),
 
               backButton(context),
             ]

@@ -76,7 +76,7 @@ class _MainScreenState extends State<MainScreen> {
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/background.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/other/background.png"), fit: BoxFit.cover),
         ),
         child: Padding(
           padding: const EdgeInsets.all(15),
@@ -87,10 +87,10 @@ class _MainScreenState extends State<MainScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildFractionButton(
-                    "assets/government.png", "GOVERNMENT".tr, "government_page"
+                    "assets/buttons/government.png", "GOVERNMENT".tr, "government_page"
                   ),
                   _buildFractionButton(
-                    "assets/people.png", "PEOPLE".tr, "people_page"
+                    "assets/buttons/people.png", "PEOPLE".tr, "people_page"
                   ),
                 ],
               ),
@@ -99,10 +99,10 @@ class _MainScreenState extends State<MainScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildFractionButton(
-                    "assets/industry.png", "INDUSTRY".tr, "industry_page"
+                    "assets/buttons/industry.png", "INDUSTRY".tr, "industry_page"
                   ),
                   _buildFractionButton(
-                    "assets/science.png", "SCIENCE".tr, "science_page"
+                    "assets/buttons/science.png", "SCIENCE".tr, "science_page"
                   ),
                 ],
               ),
@@ -111,10 +111,10 @@ class _MainScreenState extends State<MainScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _buildFractionButton(
-                    "assets/army.png", "ARMY".tr, "army_page"
+                    "assets/buttons/army.png", "ARMY".tr, "army_page"
                   ),
                   _buildFractionButton(
-                    "assets/culture.png", "CULTURE".tr, "culture_page"
+                    "assets/buttons/culture.png", "CULTURE".tr, "culture_page"
                   ),
                 ],
               ),

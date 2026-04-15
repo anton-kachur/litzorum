@@ -104,7 +104,7 @@ class _IndustryState extends State<Industry> {
                       } 
                     });
                   }, 
-                  icon: Image.asset("assets/build_icon.png", height: 22)
+                  icon: Image.asset("assets/buttons/build_icon.png", height: 22)
                 ),
 
                 IconButton(
@@ -129,7 +129,7 @@ class _IndustryState extends State<Industry> {
                       } 
                     });
                   }, 
-                  icon: Image.asset("assets/destroy_icon.png", height: 22)
+                  icon: Image.asset("assets/buttons/destroy_icon.png", height: 22)
                 ),
               ]
             ),
@@ -149,24 +149,24 @@ class _IndustryState extends State<Industry> {
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/background.png"), fit: BoxFit.cover),
+              image: AssetImage("assets/other/background.png"), fit: BoxFit.cover),
         ),
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Column(
             children: [
               parameter(
-                "assets/heavy_industry.png", 
+                "assets/buttons/heavy_industry.png", 
                 "Heavy industry", 
                 ["${'Factories'.tr}: ${currentGame.heavyIndustryFactoriesNumber}", 
                 "${'Goods output'.tr}: ${double.parse(currentGame.heavyIndustryGoodsOutput.toStringAsFixed(2))}"]),
               parameter(
-                "assets/light_industry.png", 
+                "assets/buttons/light_industry.png", 
                 "Light industry", 
                 ["${'Factories'.tr}: ${currentGame.lightIndustryFactoriesNumber}", 
                 "${'Goods output'.tr}: ${double.parse(currentGame.lightIndustryGoodsOutput.toStringAsFixed(2))}"]),
               parameter(
-                "assets/agriculture.png", 
+                "assets/buttons/agriculture.png", 
                 "Agriculture", 
                 ["${'Farms'.tr}: ${currentGame.agricultureFarmsNumber}", 
                 "${'Goods output'.tr}: ${double.parse(currentGame.agricultureFarmsGoodsOutput.toStringAsFixed(2))}"]),

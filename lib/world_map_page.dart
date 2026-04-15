@@ -170,7 +170,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
                   
                   ClipRRect(
                     child: Image.asset(
-                      "assets/map.png",
+                      "assets/other/map.png",
                       fit: BoxFit.fill,
                     )
                   ), 
@@ -187,7 +187,7 @@ class _WorldMapPageState extends State<WorldMapPage> {
                             Opacity(
                               opacity: 0.97,
                               child: Image.asset(
-                                "assets/coquired_mark.png",
+                                "assets/other/coquired_mark.png",
                                 // Scale to fit the text size
                                 width: country.value[3] * 3, 
                               ),

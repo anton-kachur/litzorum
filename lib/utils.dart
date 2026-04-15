@@ -131,7 +131,7 @@ SizedBox backButton(BuildContext context, {String asset = ''}) => SizedBox(
       children: [
         ClipRRect(
           borderRadius: BorderRadius.circular(8.0),
-          child: Image.asset(asset == '' ? "assets/blank.png" : "assets/$asset.png") 
+          child: Image.asset(asset == '' ? "assets/buttons/blank.png" : "assets/buttons/$asset.png") 
         ),
 
         Text(
@@ -168,7 +168,7 @@ Tooltip infoButton(String message, bool isDark) => Tooltip(
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 13), 
       child: Image.asset(
-        isDark ? "assets/info_icon.png" : "assets/info_icon_1.png", 
+        isDark ? "assets/buttons/info_icon.png" : "assets/buttons/info_icon_1.png", 
         height: 22
       )
     )
@@ -225,9 +225,9 @@ AppBar statsAppBar(BuildContext context) => AppBar(
           spacing: 5,
 
           children: [
-            stat("assets/money_small.png", formatLongNumber(currentGame.budget, isDouble: true)),
-            stat("assets/goods_small.png", formatLongNumber(currentGame.goods, isDouble: true)),
-            stat("assets/rate_small.png", currentGame.leadersPopularity),
+            stat("assets/buttons/money_small.png", formatLongNumber(currentGame.budget, isDouble: true)),
+            stat("assets/buttons/goods_small.png", formatLongNumber(currentGame.goods, isDouble: true)),
+            stat("assets/buttons/rate_small.png", currentGame.leadersPopularity),
           ],
         ),
       ],
@@ -268,7 +268,7 @@ BottomAppBar bottomBar(BuildContext context) {
             children: [
               Image.asset(
                 scale: 2,
-                "assets/blank_mini.png"
+                "assets/buttons/blank_mini.png"
               ), 
 
               Text(
@@ -301,7 +301,7 @@ BottomAppBar bottomBar(BuildContext context) {
             children: [
               Image.asset(
                 scale: 2,
-                "assets/blank_mini.png"
+                "assets/buttons/blank_mini.png"
               ), 
 
               Text(
@@ -329,7 +329,7 @@ BottomAppBar bottomBar(BuildContext context) {
           highlightColor: Colors.transparent, 
           icon: Image.asset(
             scale: 2.7,
-            "assets/proceed_button.png"
+            "assets/buttons/proceed_button.png"
           ), 
           onPressed: () {
             // Play the sound effect immediately

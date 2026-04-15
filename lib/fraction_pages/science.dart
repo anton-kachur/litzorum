@@ -79,7 +79,7 @@ class _ScienceState extends State<Science> {
                     }
                     
                   }, 
-                  icon: Image.asset("assets/expand_icon.png", height: 22)
+                  icon: Image.asset("assets/buttons/expand_icon.png", height: 22)
                 ),
               ]
             ),
@@ -100,15 +100,15 @@ class _ScienceState extends State<Science> {
       body: DecoratedBox(
         decoration: const BoxDecoration(
           image: DecorationImage(
-              image: AssetImage("assets/background.png"), fit: BoxFit.fill),
+              image: AssetImage("assets/other/background.png"), fit: BoxFit.fill),
         ),
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Column(
             children: [
-              parameter("assets/education.png", "Education", ["${double.parse(currentGame.educationLevel.toStringAsFixed(3))}%"]),
-              parameter("assets/research.png", "Research", ["${'Research centers'.tr}: ${currentGame.researchCentersNumber}"]),
-              parameter("assets/big_projects.png", "Big projects", ["${'Already have'.tr}: ${currentGame.bigProjects.length}"]),
+              parameter("assets/buttons/education.png", "Education", ["${double.parse(currentGame.educationLevel.toStringAsFixed(3))}%"]),
+              parameter("assets/buttons/research.png", "Research", ["${'Research centers'.tr}: ${currentGame.researchCentersNumber}"]),
+              parameter("assets/buttons/big_projects.png", "Big projects", ["${'Already have'.tr}: ${currentGame.bigProjects.length}"]),
 
               backButton(context),
             ]

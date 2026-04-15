@@ -24,7 +24,7 @@ class _GameStatsPageState extends State<GameStatsPage> {
         child: DecoratedBox(
           decoration: const BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("assets/background.png"), fit: BoxFit.cover),
+                image: AssetImage("assets/other/background.png"), fit: BoxFit.cover),
           ),
           child: Padding(
             padding: const EdgeInsets.all(15),
